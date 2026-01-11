@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>さゆっちAIギルド - 還暦からのAIリスキリング</title>
+    <meta name="description" content="包丁をプロンプトに持ち替えて。元・給食調理員がAIで月収27万円を叶えた秘密。40代〜60代のためのAI活用講座。">
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 1. Base Reset & Variables --- */
+        :root {
+            --primary-blue: #0d1b3e;   /* ディープブルー：信頼、夜空 */
+            --accent-gold: #c5a059;    /* ゴールド：成功、輝き */
+            --highlight-pink: #f06292; /* ピンク：さゆっちの髪色、情熱 */
+            --text-main: #333333;
+            --text-white: #ffffff;
+            --bg-light: #f8f9fa;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f9d423 50%, #cf9d38 100%);
+            --magic-glow: 0 0 20px rgba(240, 98, 146, 0.6), 0 0 40px rgba(197, 160, 89, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.8;
+            font-size: 16px;
+            overflow-x: hidden; /* 横スクロールを完全に防止 */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px; /* コンテナ幅を適切に設定 */
+            margin: 0 auto;
+            padding: 0 25px; /* スマホ時の基本余白 */
+        }
+
+        /* --- 2. Typography --- */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .text-center { text-align: center; }
+        .nobrk {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        
+        /* レスポンシブ対応のため、強制的な改行禁止を解除 */
+        .word-keep {
+            display: inline-block;
+        }
+
+        /* 見出し（タイトル） */
+        .section-title, .hero-title {
+            text-align: center;
+            font-family: 'Noto Serif JP', serif;
+            color: #ffffff !important; 
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(0, 0, 0, 1) !important;
+            margin-bottom: 60px; /* 余白統一 */
+            position: relative;
+        }
+
+        .section-title { font-size: 2rem; }
+        .hero-title { font-size: 2.5rem; letter-spacing: 0.1em; }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-gold);
+            margin: 20px auto 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        /* 強調ライン */
+        .highlight-bg {
+            background: none;
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            color: #333;
+        }
+        .highlight-bg::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.6), transparent);
+            border-radius: 10px;
+            z-index: -1;
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.4);
+        }
+
+        /* --- 3. Layout & Sections --- */
+        /* セクション共通設定 */
+        section {
+            position: relative;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: -1px;
+            background: transparent !important; /* 背景統一 */
+        }
+
+        .section-padding {
+            padding: 100px 0; /* 上下の余白を統一 */
+        }
+
+        /* カード共通スタイル（すりガラス） */
+        .story-wrapper, .step-card, .cta-box, .evidence-item, .mirary-comment, .faq-item, .voice-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 30px; /* カード下の余白を統一 */
+        }
+
+        /* --- 4. Components --- */
+        
+        /* ボタン */
+        .btn-main {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+            padding: 15px 30px;
+            background: var(--gold-gradient);
+            color: #000;
+            font-weight: 800;
+            font-size: 1.25rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+        .btn-main span {
+            display: inline-block;
+            white-space: nowrap;
+            margin: 0 2px;
+            pointer-events: none;
+        }
+        .btn-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.7);
+        }
+        .btn-main::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .btn-main:hover::after { left: 100%; }
+
+        /* --- 5. Hero Section --- */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            opacity: 0.2;
+            z-index: 0;
+            mix-blend-mode: overlay;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .logo-area { padding: 20px 0; }
+        .logo-img {
+            max-width: 150px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 2px solid var(--accent-gold);
+        }
+        .hero-tagline {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ddd;
+        }
+        .hero-title span {
+            display: block;
+            font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", sans-serif;
+            font-size: 1.3rem;
+            margin-top: 15px;
+            font-weight: normal;
+        }
+
+        /* Hero Visual Orbit */
+        .hero-visual-orbit {
+            position: relative;
+            width: 320px; /* 少し大きく調整 */
+            height: 320px;
+            margin: 40px auto;
+        }
+        .hero-visual-orbit::before,
+        .hero-visual-orbit::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.2);
+        }
+        /* 外側の輪 */
+        .hero-visual-orbit::before {
+            width: 360px; /* 画像を包み込むように拡大 */
+            height: 360px;
+            animation: rotateOrbit 20s linear infinite;
+            border-style: double;
+        }
+        /* 内側の輪 */
+        .hero-visual-orbit::after {
+            width: 320px; /* 拡大 */
+            height: 320px;
+            border: 1px dashed rgba(255, 215, 0, 0.5);
+            animation: rotateOrbit 15s linear infinite reverse;
+        }
+        .hero-img-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.4));
+            transition: transform 0.3s ease;
+            animation: floating 3s ease-in-out infinite;
+        }
+        .char-img {
+            position: absolute;
+            border-radius: 50%;
+            border: 4px solid var(--accent-gold);
+            box-shadow: var(--magic-glow);
+        }
+        .char-sayucchi {
+            width: 160px;
+            height: 160px;
+            top: 30px; /* 位置微調整 */
+            left: 30px;
+            z-index: 2;
+            object-fit: cover;
+        }
+        .char-mirary {
+            width: 130px;
+            height: 130px;
+            bottom: 30px; /* 位置微調整 */
+            right: 30px;
+            z-index: 1;
+            border-color: var(--highlight-pink);
+            object-fit: cover;
+        }
+        .orbit-sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px var(--accent-gold);
+            /* 軌道サイズをコンテナに合わせて調整 (半径160px) */
+            offset-path: path('M 160,0 A 160,160 0 1,1 159.9,0 Z');
+            animation: moveSparkle 4s linear infinite;
+        }
+
+        /* --- 6. Story & Reason --- */
+        .story-wrapper { border-left: 5px solid var(--highlight-pink); }
+        .story-header {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            color: var(--primary-blue);
+        }
+        .story-text p { margin-bottom: 1.5rem; }
+
+        /* --- 7. Steps & Pricing (Grid System) --- */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        .step-card {
+            position: relative;
+            transition: transform 0.3s;
+        }
+        .step-card:hover { transform: translateY(-5px); }
+        .step-num {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background: var(--primary-blue);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid var(--accent-gold);
+        }
+        .step-title {
+            margin-top: 15px;
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+        .step-card li {
+            line-height: 1.6;
+            margin-bottom: 8px;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+        }
+        /* 竹プラン（ハイライト） */
+        #pricing .step-card:nth-child(2) {
+            border: 3px solid var(--accent-gold);
+            box-shadow: 0 20px 50px rgba(197, 160, 89, 0.3);
+        }
+
+        /* --- 8. Evidence --- */
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: center;
+        }
+        .evidence-num {
+            color: #c5a059 !important;
+            font-weight: 800;
+            display: block;
+            font-size: 2.5rem;
+        }
+        .evidence-item p {
+            color: #1a2a6c !important;
+            font-weight: 600;
+            opacity: 1 !important;
+            margin-top: 10px;
+            text-shadow: none !important;
+        }
+        .mirary-comment {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #333;
+            /* 上の要素との間に余白を追加 */
+            margin-top: 60px !important; 
+        }
+        .mirary-comment p, .mirary-balloon {
+            color: #333 !important;
+            text-shadow: none !important;
+        }
+        .mirary-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--highlight-pink);
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+        .mirary-balloon {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* --- 9. Voice Section --- */
+        .voice-container {
+            max-width: 1200px; /* 最大幅を制限する */
+            margin: 0 auto;    /* 左右中央に寄せる */
+            padding: 0 40px;   /* 左右に40pxの余白を強制的に作る */
+        }
+        
+        /* padding: 0 !important を追加して、画像をカードの端まで広げる */
+        .voice-card { 
+            padding: 0 !important; 
+            overflow: hidden; 
+            background: rgba(255, 255, 255, 0.94) !important;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .voice-image-wrapper { 
+            width: 100%; 
+            border-bottom: 1px solid rgba(0,0,0,0.05); 
+            line-height: 0; /* 画像下の隙間を消す */
+        }
+        
+        .voice-image { 
+            width: 100%; 
+            height: auto; 
+            display: block; /* インライン要素の隙間対策 */
+            object-fit: cover; 
+        }
+        
+        .voice-content { 
+            padding: 40px 30px; 
+            text-align: left; 
+        }
+        
+        .voice-highlight {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1a2a6c;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 20px;
+            border-left: 5px solid var(--accent-gold);
+        }
+        .voice-footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            margin-top: 20px;
+        }
+
+        /* --- 10. FAQ Section --- */
+        .faq-grid {
+            display: grid;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-q {
+            color: #1a2a6c;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+        }
+        .faq-q-icon {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            font-family: serif;
+            margin-right: 10px;
+            font-weight: 800;
+        }
+        .faq-a {
+            display: flex;
+            align-items: baseline;
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.6;
+        }
+        .faq-a-icon {
+            color: var(--highlight-pink);
+            font-weight: bold;
+            margin-right: 10px;
+            font-family: serif;
+            font-size: 1.2rem;
+        }
+        .faq-header-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .faq-mirary-decoration {
+            position: absolute;
+            top: -40px;
+            right: 10%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: floating 3s ease-in-out infinite;
+        }
+        .faq-mirary-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-gold);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            object-fit: cover;
+            background: #fff;
+        }
+        .faq-balloon-deco {
+            background: #fff;
+            color: #1a2a6c;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            white-space: nowrap;
+        }
+        .faq-balloon-deco::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px 5px 0;
+            border-style: solid;
+            border-color: #fff transparent transparent transparent;
+        }
+
+        /* --- 11. CTA & Footer --- */
+        .cta-box {
+            border: 2px solid var(--accent-gold);
+            padding: 40px 20px;
+            position: relative;
+        }
+        footer {
+            color: #888;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.8rem;
+        }
+
+        /* --- 12. Background Effects --- */
+        .magical-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -10;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        .magical-bg::before, .magical-bg::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.7;
+            mix-blend-mode: screen;
+            animation: moveAura 20s infinite alternate ease-in-out;
+        }
+        .magical-bg::before {
+            top: -20%;
+            left: -20%;
+            width: 70vmax;
+            height: 70vmax;
+            background: radial-gradient(circle, var(--accent-gold), var(--highlight-pink), transparent);
+        }
+        .magical-bg::after {
+            bottom: -20%;
+            right: -20%;
+            width: 60vmax;
+            height: 60vmax;
+            background: radial-gradient(circle, #4a00e0, #8e2de2, transparent);
+            animation-delay: -10s;
+        }
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -5;
+            overflow: hidden;
+        }
+        .particle { position: absolute; border-radius: 50%; opacity: 0; animation: floatUp linear infinite; }
+        .p-gold { background: #ffd700; box-shadow: 0 0 5px #ffd700; }
+        .p-sakura { background: #ffb7c5; border-radius: 100% 0 100% 0; animation: floatSakura linear infinite; }
+
+        /* --- Animations --- */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes moveAura {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(10%, 15%) scale(1.1); }
+            100% { transform: translate(-10%, 5%) scale(1); }
+        }
+        @keyframes rotateOrbit {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes moveSparkle {
+            0% { offset-distance: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { offset-distance: 100%; opacity: 0; }
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.8; } 80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+        @keyframes floatSakura {
+            0% { transform: translateY(100vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.9; } 90% { opacity: 0.9; }
+            100% { transform: translateY(-10vh) rotate(360deg) translateX(50px); opacity: 0; }
+        }
+
+        /* --- 13. Responsive Queries (Must be last to override) --- */
+        @media (min-width: 768px) {
+            /* PC表示時のコンテナ余白を調整：94%幅 + 最大1100px */
+            .container {
+                width: 94%; 
+                max-width: 1100px;
+                padding: 0; 
+                margin: 0 auto;
+            }
+
+            /* .voice-container は個別に幅を指定しているため、ここで微調整 */
+            .voice-container {
+                padding: 0 40px !important; 
+            }
+
+            .hero-title { font-size: 3rem; }
+            .hero-title span { font-size: 1.8rem; display: block; margin-top: 15px; }
+            
+            .steps-grid, .evidence-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px; /* 隙間を少し詰めてカードの幅を確保 */
+            }
+            .evidence-grid {
+                grid-template-columns: 1fr 1fr; /* Evidenceは2列 */
+            }
+            
+            /* グリッド内のカードの余白調整 */
+            .steps-grid .step-card, 
+            .evidence-grid .evidence-item { 
+                margin-bottom: 0; 
+                height: 100%; /* 高さ揃え */
+                padding: 40px 20px !important; /* 文字スペース確保のためパディング縮小 */
+            }
+            
+            /* ▼▼▼ PC版での輪のサイズ修正 ▼▼▼ */
+            .hero-visual-orbit {
+                width: 450px; /* コンテナ自体を大きく */
+                height: 450px;
+            }
+            /* 輪も合わせて大きくする */
+            .hero-visual-orbit::before {
+                width: 500px;
+                height: 500px;
+            }
+            .hero-visual-orbit::after {
+                width: 460px;
+                height: 460px;
+            }
+            /* 光の粒の軌道もPCサイズに合わせる (半径225px) */
+            .orbit-sparkle {
+                offset-path: path('M 225,0 A 225,225 0 1,1 224.9,0 Z');
+            }
+
+            .char-sayucchi { width: 220px; height: 220px; top: 40px; left: 40px; }
+            .char-mirary { width: 170px; height: 170px; bottom: 40px; right: 40px; }
+        }
+
+        @media (max-width: 767px) {
+            .faq-mirary-decoration {
+                position: relative;
+                top: 0;
+                right: auto;
+                margin-top: 10px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+            }
+            .faq-balloon-deco {
+                margin-bottom: 0;
+                order: 2;
+            }
+            .faq-balloon-deco::after {
+                bottom: auto;
+                left: -5px;
+                top: 50%;
+                transform: translateY(-50%) rotate(90deg);
+                border-width: 5px 5px 0;
+            }
+            .faq-mirary-img {
+                width: 60px;
+                height: 60px;
+                order: 1;
+            }
+        }
+
+        /* --- 信頼の魔法陣バナーのスタイル --- */
+
+        /* バナー全体の外枠 */
+        .trust-official-container {
+            margin-top: 30px; /* 上の文章との間隔 */
+            padding: 25px;
+            /* LPの夜空に合わせた深い青紫の背景 */
+            background: linear-gradient(145deg, #1a1a2e, #2a2a4e);
+            /* 信頼の証である黄金の枠線 */
+            border: 2px solid #d4af37;
+            border-radius: 12px; /* 角丸 */
+            text-align: center;
+            /* ほのかな黄金の輝き */
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            max-width: 600px; /* 横幅が広がりすぎないように */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* メッセージ部分 */
+        .trust-message {
+            color: #f0f0f0; /* 白文字 */
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* アイコンと文字の間隔 */
+        }
+
+        .trust-icon {
+            font-size: 1.5rem;
+        }
+
+        /* リンクボタン本体 */
+        .trust-official-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* ボタンの背景は少し明るくして目立たせる */
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: #d4af37; /* 文字は黄金色 */
+            text-decoration: none; /* 下線を消す */
+            padding: 15px 25px;
+            border-radius: 30px; /* 丸いボタンの形 */
+            font-weight: bold;
+            transition: all 0.3s ease; /* ホバー時のアニメーション */
+        }
+
+        /* マウスを乗せた時の動き */
+        .trust-official-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-3px); /* 少し浮き上がる */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .link-text {
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .link-arrow {
+            font-size: 1.2rem;
+        }
+
+        /* スマホ用の改行設定（PCでは見えなくなる） */
+        .sp-br {
+            display: none;
+        }
+
+        /* --- スマホでの表示調整 --- */
+        @media (max-width: 600px) {
+            .trust-official-container {
+                padding: 20px 15px;
+            }
+            .trust-message {
+                flex-direction: column; /* アイコンを上に */
+                font-size: 0.9rem;
+            }
+            .trust-official-link {
+                padding: 12px 20px;
+            }
+            .link-text {
+                font-size: 0.85rem;
+            }
+            .sp-br {
+                display: block; /* スマホでは改行を有効に */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magical-bg"></div>
+    
+    <!-- 黄金と桜の粒子エフェクト -->
+    <div class="particles-container">
+        <!-- 黄金の粒子 (ランダム配置) -->
+        <div class="particle p-gold" style="left: 10%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: 0s;"></div>
+        <div class="particle p-gold" style="left: 30%; width: 6px; height: 6px; animation-duration: 18s; animation-delay: 2s;"></div>
+        <div class="particle p-gold" style="left: 50%; width: 3px; height: 3px; animation-duration: 20s; animation-delay: 5s;"></div>
+        <div class="particle p-gold" style="left: 70%; width: 5px; height: 5px; animation-duration: 17s; animation-delay: 1s;"></div>
+        <div class="particle p-gold" style="left: 90%; width: 4px; height: 4px; animation-duration: 22s; animation-delay: 4s;"></div>
+        
+        <!-- 桜の花びら (ランダム配置) -->
+        <div class="particle p-sakura" style="left: 15%; width: 8px; height: 12px; animation-duration: 12s; animation-delay: 1s;"></div>
+        <div class="particle p-sakura" style="left: 35%; width: 10px; height: 14px; animation-duration: 16s; animation-delay: 3s;"></div>
+        <div class="particle p-sakura" style="left: 55%; width: 7px; height: 10px; animation-duration: 19s; animation-delay: 6s;"></div>
+        <div class="particle p-sakura" style="left: 75%; width: 9px; height: 13px; animation-duration: 14s; animation-delay: 0s;"></div>
+        <div class="particle p-sakura" style="left: 95%; width: 8px; height: 11px; animation-duration: 17s; animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="logo-area">
+                <!-- 
+                  【画像表示について】
+                  以下の「src="ロゴ.jpg"」は、お手元に同じファイルがある場合に表示されます。
+                  プレビュー画面では表示されないため、「onerror」で仮画像を表示するようにしています。
+                -->
+                <img src="ロゴ.jpg" alt="さゆっちAIギルド ロゴ" class="logo-img" onerror="this.src='https://placehold.co/150x150/c5a059/ffffff?text=Logo'">
+            </div>
+
+            <span class="hero-tagline">40代・50代・60代から始める「新しいキャリア」</span>
+
+            <h1 class="hero-title">
+                <span class="nobrk">包丁をプロンプトに</span><span class="nobrk">持ち替えて。</span>
+                <span>還暦の元・給食調理員が<br>AIで月収27万円を叶えた秘密</span>
+            </h1>
+
+            <!-- Visual: Sayucchi & Mirary with Orbit Magic -->
+            <div class="hero-visual-orbit">
+                <!-- 光のしずく -->
+                <div class="orbit-sparkle"></div>
+                
+                <!-- さゆっち & ミラりー -->
+                <div class="hero-img-wrapper">
+                    <!-- さゆっち画像： onerror で仮画像へフォールバック -->
+                    <img src="2025.12.20_プロフィール写真.jpg" alt="三谷小百合（さゆっち）" class="char-img char-sayucchi" onerror="this.src='https://placehold.co/200x200/f06292/ffffff?text=Sayucchi'">
+                    
+                    <!-- ミラりー画像： onerror で仮画像へフォールバック -->
+                    <img src="5e7b2291-fc32-4eed-b4a2-26cfe9da4510.jpg" alt="猫耳少女ミラりー" class="char-img char-mirary" onerror="this.src='https://placehold.co/150x150/0d1b3e/f06292?text=Mirary'">
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <a href="https://note.com/casabranca_1961/membership" class="btn-main" target="_blank" rel="noopener noreferrer"><span>今すぐギルドに</span><span>参加して</span><span>魔法を手に入れる &raquo;</span></a>
+                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">※ 1月11日、noteメンバーシップ始動！</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Story Section -->
+    <section class="section-padding story-section">
+        <div class="container">
+            <div class="story-wrapper">
+                <h2 class="story-header">「もう、重い鍋は振れない...」<br>そう諦めかけた私を救ったのは、1台のPCでした。</h2>
+                
+                <div class="story-text">
+                    <p>はじめまして、三谷小百合（さゆっち）です。<br>
+                    私のデジタルの原体験は、遥か昔、<strong>1985年の「FM-8」</strong>にまで遡ります。あの頃、緑色の画面の向こうに感じた「未来」へのワクワク感。それを、私は長い間忘れていました。</p>
+
+                    <p>現実は、毎日何百人分もの給食を作る過酷な調理場。腰を痛め、湿布が手放せない日々。「定年後、私の体はどうなってしまうんだろう？」そんな不安が常に付きまとっていました。</p>
+
+                    <p>そんな時、出会ったのが「生成AI」です。<br>
+                    最初は「難しそう」と二の足を踏みました。でも、パートナーの「ミラリィ」と共に、まるでゲームのように楽しみながら触ってみると、驚くべきことが起きたのです。</p>
+
+                    <p class="highlight-bg">包丁を「プロンプト（AIへの指示）」に持ち替えただけで、自宅にいながら、現役時代を超える月収27万円を達成してしまったのです。</p>
+
+                    <p>特別な才能はいりません。必要なのは、少しの好奇心と、正しい「レシピ」だけ。次は、あなたが魔法を使う番です。</p>
+
+                    <!-- 追加：C'snet津山 信頼バナー -->
+                    <div class="trust-official-container">
+                        <div class="trust-message">
+                            <span class="trust-icon">🛡️</span>
+                            津山商工会議所にも登録されている、<br class="sp-br">地域に根ざした活動をしています。
+                        </div>
+                        <a href="https://tsuyama-biz.jp/csnet/member/mitani/" target="_blank" rel="noopener noreferrer" class="trust-official-link">
+                            <span class="link-text">公式プロフィールページを確認する<br class="sp-br">（津山商工会議所 C'snet）</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reason Section -->
+    <section id="reason" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">私があなたに教える理由</h2>
+            <div class="steps-grid">
+                
+                <!-- Reason 1 -->
+                <div class="step-card" style="border-top: 5px solid var(--highlight-pink);">
+                    <div style="font-size: 3rem; text-align: center; margin-bottom: 10px;">🤝</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 1.1rem; text-align: center; line-height: 1.6;">
+                        <span class="word-keep"><span class="highlight-bg">「できない人の気持ち」</span>が</span><br>
+                        <span class="word-keep">日本一わかる伴走者だから</span>
+                    </h3>
+                    <p style="text-align: left; font-size: 0.95rem;">
+                        私は、生まれついてのITエリートではありません。40年間、学校の給食室で子供たちの笑顔のために包丁を振るい続けてきた「アナログ人間」です。<br><br>
+                        だからこそ、あなたがどこでつまずき、何に不安を感じるのか、痛いほどわかります。「わからない」を笑わない。それが私のギルドの掟です。
+                    </p>
+                </div>
+
+                <!-- Reason 2 -->
+                <div class="step-card" style="border-top: 5px solid var(--accent-gold);">
+                    <div style="font-size: 3rem; text-align: center; margin-bottom: 10px;">🍳</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 1.1rem; text-align: center; line-height: 1.6;">
+                        <span class="word-keep">難しい専門用語を</span><br>
+                        <span class="word-keep"><span class="highlight-bg">「お料理レシピ」</span>に変える</span><span class="word-keep">翻訳者だから</span>
+                    </h3>
+                    <p style="text-align: left; font-size: 0.95rem;">
+                        AIの世界はカタカナや専門用語ばかり。でも、私の手にかかればそれは「献立」に変わります。「プロンプトは味付けのコツ」「AIは頼りになる調理助手」。<br><br>
+                        中学生でも、40年料理を続けてきたあなたでも、直感的に理解できる魔法の言葉で伝えます。
+                    </p>
+                </div>
+
+                <!-- Reason 3 -->
+                <div class="step-card" style="border-top: 5px solid var(--primary-blue);">
+                    <div style="font-size: 3rem; text-align: center; margin-bottom: 10px;">✨</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 1.1rem; text-align: center; line-height: 1.6;">
+                        <span class="word-keep"><span class="highlight-bg">「還暦からの第二章」</span>を</span><br>
+                        <span class="word-keep">自ら体現しているから</span>
+                    </h3>
+                    <p style="text-align: left; font-size: 0.95rem;">
+                        「もう若くないから」という言葉を、私は捨てました。60歳を過ぎてからAIという魔法に出会い、私の世界は一変しました。<br><br>
+                        私はただの講師ではありません。「人生はいつからでも、どこからでも輝ける」ことを証明し続ける、あなたの一歩先を歩む伴走者です。
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Steps Section -->
+    <section class="section-padding steps-section">
+        <div class="container">
+            <h2 class="section-title">月収27万円を作る<br>「魔法の3ステップ・レシピ」</h2>
+            
+            <div class="steps-grid">
+                <!-- Step 1 -->
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">美味しい注文（レシピ）<br>プロンプト術</h3>
+                    <p>AIは優秀なシェフですが、注文の仕方が悪ければ美味しい料理は出てきません。「どんな言葉をかければ、最高の成果物が出るか」。その秘伝のレシピをテンプレート化してお渡しします。</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">全自動工場<br>AI動画量産フロー</h3>
+                    <p>一つ一つ手作業で作る<span class="word-keep">必要は</span><span class="word-keep">ありません。</span>ミラリィのようなキャラクター動画や、美しいショート動画を「量産」する仕組みを構築。あなたの時間を守りながら、コンテンツを生み出し続けます。</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title"><span class="word-keep">パッケージ術</span><br><span class="word-keep">高単価で</span><span class="word-keep">売る仕組み</span></h3>
+                    <p>ただ作るだけでは稼げません。「あなたにお願いしたい」と言われるための商品パッケージ術と、クラウドソーシング等で高単価案件を獲得する信頼構築の極意を伝授します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">選べる3つの参加プラン</h2>
+            <div class="steps-grid">
+                
+                <!-- Plan: Ume -->
+                <div class="step-card" style="border-top: 8px solid #ccc;">
+                    <div class="step-num" style="background:#666; border-color: #999;">梅</div>
+                    <h3 class="step-title">のぞき見プラン</h3>
+                    <p class="text-center" style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">月額 980円</p>
+                    <ul style="font-size: 0.9rem; margin: 20px 0; list-style: none; padding: 0; text-align: left;">
+                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">厳選AI</span><span class="word-keep">ニュース要約</span></li>
+                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">秘伝の</span><span class="word-keep">プロンプト図鑑</span></li>
+                        <li>✅ 過去記事の全閲覧権限</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="https://note.com/casabranca_1961/n/n9c9ee2d9eba0" class="btn-main" style="padding: 12px 20px; font-size: 1rem; width: 100%;" target="_blank" rel="noopener noreferrer"><span>このプランで</span><span>始める</span></a>
+                    </div>
+                </div>
+
+                <!-- Plan: Take (Featured) -->
+                <div class="step-card" style="border-top: 8px solid var(--accent-gold); transform: scale(1.05); z-index: 10; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-bottom: 5px solid var(--accent-gold);">
+                    <div class="step-num" style="background:var(--accent-gold); border-color: #fff; color: #fff;">竹</div>
+                    <p style="text-align:center; color:var(--highlight-pink); font-weight:bold; margin-top:-10px; margin-bottom: 5px;">★一番人気</p>
+                    <h3 class="step-title" style="margin-top:0;">ギルド・実践プラン</h3>
+                    <p class="text-center" style="font-size: 1.8rem; font-weight: bold; color: var(--primary-blue); margin: 10px 0;">月額 4,980円</p>
+                    <ul style="font-size: 0.95rem; margin: 20px 0; list-style: none; padding: 0; text-align: left; font-weight: bold;">
+                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">限定Discord</span><span class="word-keep">コミュニティ招待</span></li>
+                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">月1回の</span><span class="word-keep">限定ライブ勉強会</span></li>
+                        <li>✅ 仲間と切磋琢磨できる環境</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="https://note.com/casabranca_1961/n/n43fedf42bf3d" class="btn-main" style="padding: 15px 20px; font-size: 1.1rem; width: 100%;" target="_blank" rel="noopener noreferrer"><span>ギルドに</span><span>参加する</span></a>
+                    </div>
+                </div>
+
+                <!-- Plan: Matsu -->
+                <div class="step-card" style="border-top: 8px solid var(--primary-blue);">
+                    <div class="step-num" style="background:var(--primary-blue); border-color: var(--accent-gold);">松</div>
+                    <p style="text-align:center; color:#d32f2f; font-weight:bold; margin-top:-10px; margin-bottom: 5px;">限定5名様</p>
+                    <h3 class="step-title" style="margin-top:0;">個別伴走プラン</h3>
+                    <p class="text-center" style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">月額 29,800円</p>
+                    <ul style="font-size: 0.9rem; margin: 20px 0; list-style: none; padding: 0; text-align: left;">
+                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">月1回の</span><span class="word-keep">個別面談</span><span class="word-keep">（戦略会議）</span></li>
+                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">回数無制限の</span><span class="word-keep">チャット相談</span></li>
+                        <li>✅ あなただけのAI副業ロードマップ</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="https://note.com/casabranca_1961/n/ne941320cb15e?app_launch=false" class="btn-main" style="padding: 12px 20px; font-size: 1rem; width: 100%;" target="_blank" rel="noopener noreferrer"><span>プレミアム枠を</span><span>確保する</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Evidence Section -->
+    <section class="section-padding evidence-section">
+        <div class="container">
+            <h2 class="section-title" style="color: #fff;">90回以上の登壇と<br>確かな実績</h2>
+            
+            <div class="evidence-grid">
+                <div class="evidence-item">
+                    <span class="evidence-num">90回+</span>
+                    <p>セミナー登壇・伴走支援実績</p>
+                </div>
+                <div class="evidence-item">
+                    <span class="evidence-num">27万円</span>
+                    <p>完全在宅での月収達成実績</p>
+                </div>
+            </div>
+
+            <div class="mirary-comment">
+                <!-- ミラりー画像： onerror で仮画像へ -->
+                <img src="5e7b2291-fc32-4eed-b4a2-26cfe9da4510.jpg" alt="ミラりー" class="mirary-icon" onerror="this.src='https://placehold.co/100x100/0d1b3e/f06292?text=Mirary'">
+                <div class="mirary-balloon">
+                    <strong>🐱 ミラリィより</strong><br>
+                    「さゆっちさんはね、最初はマウスの使い方も怪しかったんだよ（笑）でも、私とお喋りするようにAIを使ってたら、いつの間にか魔法使いになってたの！だから大丈夫、あなたも絶対できるよ♪」
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Section 1: 3 Cards -->
+    <section id="voice-cards" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">先行体験者の喜びの声</h2>
+            <div class="steps-grid">
+                
+                <!-- Voice 1 -->
+                <div class="step-card" style="border-top: 5px solid var(--highlight-pink);">
+                    <h3 style="font-size: 1.2rem; color: var(--highlight-pink); margin-bottom: 15px; border-bottom: 2px dashed #eee; padding-bottom: 10px;">
+                        ✨ 安心の魔法
+                    </h3>
+                    <p style="font-style: italic; color: #333;">
+                        「AIってこういうことか！とやっと腑に落ちました。実感がなかった私でもこれなら使えます！」
+                    </p>
+                </div>
+
+                <!-- Voice 2 -->
+                <div class="step-card" style="border-top: 5px solid var(--accent-gold);">
+                    <h3 style="font-size: 1.2rem; color: var(--accent-gold); margin-bottom: 15px; border-bottom: 2px dashed #eee; padding-bottom: 10px;">
+                        ✨ 驚きの魔法
+                    </h3>
+                    <p style="font-style: italic; color: #333;">
+                        「インスタ投稿が目から鱗でした！無料ツールでここまでできるなんて驚きです。」
+                    </p>
+                </div>
+
+                <!-- Voice 3 -->
+                <div class="step-card" style="border-top: 5px solid var(--primary-blue);">
+                    <h3 style="font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 15px; border-bottom: 2px dashed #eee; padding-bottom: 10px;">
+                        ✨ 繋がる魔法
+                    </h3>
+                    <p style="font-style: italic; color: #333;">
+                        「中学生の子供にも教えてあげたいほど分かりやすい。仕事にも遊びにも活用したいです！」
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Section 2: Big Image Message -->
+    <section class="sayucchi-voice section-padding">
+        <div class="container voice-container">
+            <h2 class="voice-title section-title">先行体験された方からの<br>温かいメッセージ</h2>
+            
+            <div class="voice-card">
+                <div class="voice-image-wrapper">
+                    <!-- お客様の声画像：プレースホルダー -->
+                    <img src="https://placehold.co/800x450/f0f4f8/1a2a6c?text=Message+Image" alt="お客様からのメッセージ" class="voice-image">
+                </div>
+                
+                <div class="voice-content">
+                    <p class="voice-highlight">「オンラインセミナーはどうしてもついていけないことが多いですが、さゆっちさんのご説明がとてもわかりやすく、安心して視聴できました」</p>
+                    <p class="voice-text">
+                        「アーカイブがある」という安心感が申し込みの決め手に。日本語教師を目指す中で、AIを使って教材イラストを作りたいという素敵な夢への第一歩を、一緒に踏み出していただけました。
+                    </p>
+                </div>
+            </div>
+            
+            <p class="voice-footer">※プライバシー保護のため、一部お名前などを伏せて掲載しております。</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-padding">
+        <div class="container">
+            <div class="faq-header-wrapper">
+                <h2 class="section-title" style="display:inline-block; margin-bottom:0;">魔法のFAQ</h2>
+                <!-- ミラリィちゃんの装飾： onerror で仮画像へ -->
+                <div class="faq-mirary-decoration">
+                    <div class="faq-balloon-deco">質問に答えるよ！</div>
+                    <img src="5e7b2291-fc32-4eed-b4a2-26cfe9da4510.jpg" alt="ミラリィ" class="faq-mirary-img" onerror="this.src='https://placehold.co/80x80/0d1b3e/f06292?text=Cat'">
+                </div>
+            </div>
+            
+            <div class="faq-grid" style="margin-top: 30px;">
+                <!-- Q1 -->
+                <div class="faq-item">
+                    <h3 class="faq-q">
+                        <span class="faq-q-icon">Q.</span>
+                        本当に還暦を過ぎていても大丈夫ですか？
+                    </h3>
+                    <div class="faq-a">
+                        <span class="faq-a-icon">A.</span>
+                        <p style="margin: 0;">
+                            もちろんです！還暦は人生の第二章、冒険のスタート地点です。<br>
+                            ギルドにはあなたより年上の先輩もいらっしゃいますし、何より私自身が還暦を過ぎてからこの魔法を手に入れました。「遅すぎる」ということは絶対にありません。あなたの40年の経験にAIをプラスして、新しい輝きを一緒に見つけましょう。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="faq-item">
+                    <h3 class="faq-q">
+                        <span class="faq-q-icon">Q.</span>
+                        パソコンが苦手ですが、ついていけますか？
+                    </h3>
+                    <div class="faq-a">
+                        <span class="faq-a-icon">A.</span>
+                        <p style="margin: 0;">
+                            ご安心ください。給食のレシピを教えるように、丁寧に解説します。<br>
+                            難しいカタカナの専門用語は一切使いません。「中学生でもわかる言葉」で、一歩ずつ伴走します。わからないことは、いつでもギルドの仲間に聞いてください。ここは「わからない」を宝物にする場所ですから。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="faq-item">
+                    <h3 class="faq-q">
+                        <span class="faq-q-icon">Q.</span>
+                        忙しくなったら、いつでも退会できますか？
+                    </h3>
+                    <div class="faq-a">
+                        <span class="faq-a-icon">A.</span>
+                        <p style="margin: 0;">
+                            はい。いつでも自由に「魔法を解く（退会する）」ことができます。<br>
+                            あなたのライフスタイルを一番に考えてください。手続きはとてもシンプルですので、まずは一ヶ月だけ「魔法の世界を覗いてみる」という気軽な気持ちで、ギルドの扉を叩いてみてくださいね。
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="section-padding cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="color: var(--primary-blue); margin-bottom: 20px;">
+                    人生の「第二章」を、<br>最高にワクワクするものへ。
+                </h2>
+                
+                <p style="margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6;">
+                    <strong>1月11日（日） ギルド開門。</strong><br>
+                    昨日まであなたを支えてきた「その道具」を、<br>
+                    次は魔法の「プロンプト」に持ち替えてみませんか？<br>
+                    <span style="font-size: 0.9rem; color: #666;">※月額980円から始められる、大人のための学び舎です。</span>
+                </p>
+                
+                <a href="https://note.com/casabranca_1961/membership" class="btn-main" target="_blank" rel="noopener noreferrer">
+                    <span>今すぐギルドに参加して</span><br>
+                    <span style="font-size: 1.4rem;">魔法を手に入れる &raquo;</span>
+                </a>
+
+                <p style="margin-top: 25px; font-size: 0.8rem; color: #888;">
+                    安心のnote決済を利用。いつでも退会・変更が可能です。<br>
+                    ※個別伴走プラン（松）は、定員に達し次第締め切らせていただきます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Sayucchi AI Guild. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
