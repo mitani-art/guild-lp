@@ -5,1197 +5,1463 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>三谷小百合（さゆっち）｜生成AIコンサルタント / 生成AI活用講師</title>
     <meta name="description" content="「わからない」を笑わない、一番優しいAIの相談窓口。岡山在住65歳の生成AIコンサルタントが、個人・企業のAI活用をサポートします。週刊SPA!（2026年4月21日号）掲載。">
-   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. Base Reset & Variables --- */
+        /* =============================================
+           CSS変数・リセット
+        ============================================= */
         :root {
-            --primary-blue: #0d1b3e;   /* ディープブルー：信頼、夜空 */
-            --accent-gold: #c5a059;    /* ゴールド：成功、輝き */
-            --highlight-pink: #f06292; /* ピンク：さゆっちの髪色、情熱 */
-            --text-main: #333333;
-            --text-white: #ffffff;
-            --bg-light: #f8f9fa;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f9d423 50%, #cf9d38 100%);
-            --magic-glow: 0 0 20px rgba(240, 98, 146, 0.6), 0 0 40px rgba(197, 160, 89, 0.4);
+            --pink:        #f06292;
+            --pink-light:  #fce4ec;
+            --pink-mid:    #f8b4c8;
+            --blue:        #5b8fc9;
+            --blue-light:  #e8f0fb;
+            --blue-mid:    #90b8e0;
+            --text:        #333333;
+            --text-sub:    #666666;
+            --white:       #ffffff;
+            --bg:          #fff8fb;
+            --gold:        #c5a059;
+            --border:      #f0d0df;
+            --shadow:      0 4px 20px rgba(240,98,146,0.10);
+            --shadow-card: 0 6px 28px rgba(91,143,201,0.10);
+            --radius:      16px;
+            --radius-sm:   10px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            color: var(--text-main);
-            background-color: var(--bg-light);
+            color: var(--text);
+            background: var(--bg);
             line-height: 1.8;
             font-size: 16px;
-            overflow-x: hidden; /* 横スクロールを完全に防止 */
+            overflow-x: hidden;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        img { max-width: 100%; height: auto; display: block; }
+        a   { text-decoration: none; color: inherit; }
 
         .container {
             width: 100%;
-            max-width: 1000px; /* コンテナ幅を適切に設定 */
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 25px; /* スマホ時の基本余白 */
+            padding: 0 24px;
         }
 
-        /* --- 2. Typography --- */
-        h1, h2, h3 {
-            font-weight: 700;
-            line-height: 1.4;
-        }
+        .section-pad { padding: 60px 0; }
 
-        .text-center { text-align: center; }
-        .nobrk {
-            display: inline-block;
-            white-space: nowrap;
-        }
-        
-        /* レスポンシブ対応のため、強制的な改行禁止を解除 */
-        .word-keep {
-            display: inline-block;
-        }
-
-        /* 見出し（タイトル） */
-        .section-title, .hero-title {
+        /* =============================================
+           共通：セクション見出し
+        ============================================= */
+        .sec-title {
             text-align: center;
             font-family: 'Noto Serif JP', serif;
-            color: #ffffff !important; 
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(0, 0, 0, 1) !important;
-            margin-bottom: 60px; /* 余白統一 */
-            position: relative;
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.5;
         }
+        .sec-sub {
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 1rem;
+            margin-bottom: 48px;
+        }
+        .sec-title-wrap { margin-bottom: 40px; }
 
-        .section-title { font-size: 2rem; }
-        .hero-title { font-size: 2.5rem; letter-spacing: 0.1em; }
-
-        .section-title::after {
-            content: "";
+        .pink-line {
             display: block;
-            width: 60px;
+            width: 50px;
             height: 3px;
-            background-color: var(--accent-gold);
-            margin: 20px auto 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-
-        /* 強調ライン */
-        .highlight-bg {
-            background: none;
-            position: relative;
-            display: inline-block;
-            font-weight: bold;
-            color: #333;
-        }
-        .highlight-bg::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 5px;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.6), transparent);
+            background: linear-gradient(90deg, var(--pink), var(--pink-mid));
             border-radius: 10px;
-            z-index: -1;
-            box-shadow: 0 0 10px rgba(197, 160, 89, 0.4);
+            margin: 12px auto 0;
         }
 
-        /* --- 3. Layout & Sections --- */
-        /* セクション共通設定 */
-        section {
-            position: relative;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: -1px;
-            background: transparent !important; /* 背景統一 */
+        /* =============================================
+           共通：カード
+        ============================================= */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-card);
+            padding: 32px 28px;
+            border: 1px solid var(--border);
         }
 
-        .section-padding {
-            padding: 100px 0; /* 上下の余白を統一 */
-        }
-
-        /* カード共通スタイル（すりガラス） */
-        .story-wrapper, .step-card, .cta-box, .evidence-item, .mirary-comment, .faq-item, .voice-card {
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            margin-bottom: 30px; /* カード下の余白を統一 */
-        }
-
-        /* --- 4. Components --- */
-        
-        /* ボタン */
-        .btn-main {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 60px;
-            padding: 15px 30px;
-            background: var(--gold-gradient);
-            color: #000;
-            font-weight: 800;
-            font-size: 1.25rem;
-            border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid #fff;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            line-height: 1.4;
-        }
-        .btn-main span {
+        /* =============================================
+           共通：ボタン
+        ============================================= */
+        .btn-pink {
             display: inline-block;
-            white-space: nowrap;
-            margin: 0 2px;
-            pointer-events: none;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #f06292, #e91e8c);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 16px rgba(240,98,146,0.35);
+            transition: transform 0.25s, box-shadow 0.25s;
+            letter-spacing: 0.04em;
+            text-align: center;
         }
-        .btn-main:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.7);
+        .btn-pink:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(240,98,146,0.45);
         }
-        .btn-main::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
-        }
-        .btn-main:hover::after { left: 100%; }
 
-        /* --- 5. Hero Section --- */
+        .btn-outline {
+            display: inline-block;
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--pink);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            border: 2px solid var(--pink);
+            transition: background 0.25s, color 0.25s;
+            text-align: center;
+        }
+        .btn-outline:hover {
+            background: var(--pink-light);
+        }
+
+        .btn-blue {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--blue), #3a6ea8);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 16px rgba(91,143,201,0.35);
+            transition: transform 0.25s, box-shadow 0.25s;
+            letter-spacing: 0.04em;
+            text-align: center;
+        }
+        .btn-blue:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(91,143,201,0.45);
+        }
+
+        /* =============================================
+           0. 固定ナビゲーション
+        ============================================= */
+        .site-nav {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(240,98,146,0.08);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+        }
+        .nav-logo img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--pink-mid);
+            object-fit: cover;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        .nav-menu a {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            transition: color 0.2s;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-menu a:hover {
+            color: var(--pink);
+            border-bottom-color: var(--pink);
+        }
+        .nav-cta {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #f06292, #e91e8c);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            box-shadow: 0 3px 12px rgba(240,98,146,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(240,98,146,0.4);
+        }
+
+        @media (max-width: 767px) {
+            .nav-menu { display: none; }
+            .nav-inner { height: 56px; }
+            /* ①上部ナビCTAを一回り小さく */
+            .nav-cta { font-size: 0.82rem; padding: 8px 16px; }
+        }
+        @media (max-width: 819px) {
+            /* プロフィール下CTAはスマホでは非表示（コピー直後のCTAで代替） */
+            .hero-cta-wrap { display: none; }
+            /* ⑤Hero全体の上下余白を圧縮してプロフィール写真を少し上に */
+            .hero { padding: 20px 0 16px; }
+            /* バッジ・サブコピーの余白も詰める */
+            .hero-badge { margin-bottom: 6px; }
+            .hero-for   { margin-bottom: 4px; }
+            /* ③CTAボタン周辺の余白を詰める */
+            .hero-benefit { margin-bottom: 8px; }
+            /* ④タグの上マージンを抑える */
+            .target-tags { margin-top: 10px; }
+        }
+
+        /* =============================================
+           1. Hero セクション
+        ============================================= */
         .hero {
-            padding-top: 120px;
-            padding-bottom: 80px;
+            background: linear-gradient(160deg, #fff0f5 0%, #fce4ec 45%, #e8f0fb 100%);
+            padding: 32px 0 28px;
             position: relative;
             overflow: hidden;
-            text-align: center;
         }
         .hero::before {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            opacity: 0.2;
-            z-index: 0;
-            mix-blend-mode: overlay;
-        }
-        .hero-content { position: relative; z-index: 1; }
-        .logo-area { padding: 20px 0; }
-        .logo-img {
-            max-width: 150px;
-            margin: 0 auto;
+            top: -80px; right: -80px;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(240,98,146,0.12), transparent 70%);
             border-radius: 50%;
-            border: 2px solid var(--accent-gold);
+            pointer-events: none;
         }
-        .hero-tagline {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ddd;
-        }
-        .hero-title span {
-            display: block;
-            font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", sans-serif;
-            font-size: 1.3rem;
-            margin-top: 15px;
-            font-weight: normal;
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -80px; left: -80px;
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(91,143,201,0.11), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
-        /* Hero Visual Orbit */
-        .hero-visual-orbit {
+        /* --- 2カラムレイアウト --- */
+        .hero-inner {
             position: relative;
-            width: 320px; /* 少し大きく調整 */
-            height: 320px;
-            margin: 40px auto;
-        }
-        .hero-visual-orbit::before,
-        .hero-visual-orbit::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 1px solid rgba(197, 160, 89, 0.4);
-            box-shadow: 0 0 15px rgba(197, 160, 89, 0.2);
-        }
-        /* 外側の輪 */
-        .hero-visual-orbit::before {
-            width: 360px; /* 画像を包み込むように拡大 */
-            height: 360px;
-            animation: rotateOrbit 20s linear infinite;
-            border-style: double;
-        }
-        /* 内側の輪 */
-        .hero-visual-orbit::after {
-            width: 320px; /* 拡大 */
-            height: 320px;
-            border: 1px dashed rgba(255, 215, 0, 0.5);
-            animation: rotateOrbit 15s linear infinite reverse;
-        }
-        .hero-img-wrapper {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 10;
-            filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.4));
-            transition: transform 0.3s ease;
-            animation: floating 3s ease-in-out infinite;
-        }
-        .char-img {
-            position: absolute;
-            border-radius: 50%;
-            border: 4px solid var(--accent-gold);
-            box-shadow: var(--magic-glow);
-        }
-        .char-sayucchi {
-            width: 160px;
-            height: 160px;
-            top: 30px; /* 位置微調整 */
-            left: 30px;
-            z-index: 2;
-            object-fit: cover;
-        }
-        .char-mirary {
-            width: 130px;
-            height: 130px;
-            bottom: 30px; /* 位置微調整 */
-            right: 30px;
             z-index: 1;
-            border-color: var(--highlight-pink);
-            object-fit: cover;
-        }
-        .orbit-sparkle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #fff, 0 0 20px var(--accent-gold);
-            /* 軌道サイズをコンテナに合わせて調整 (半径160px) */
-            offset-path: path('M 160,0 A 160,160 0 1,1 159.9,0 Z');
-            animation: moveSparkle 4s linear infinite;
-        }
-
-        /* --- 6. Story & Reason --- */
-        .story-wrapper { border-left: 5px solid var(--highlight-pink); }
-        .story-header {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            color: var(--primary-blue);
-        }
-        .story-text p { margin-bottom: 1.5rem; }
-
-        /* --- 7. Steps & Pricing (Grid System) --- */
-        .steps-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
-        }
-        .step-card {
-            position: relative;
-            transition: transform 0.3s;
-        }
-        .step-card:hover { transform: translateY(-5px); }
-        .step-num {
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            background: var(--primary-blue);
-            color: #fff;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
+            gap: 28px;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            border: 2px solid var(--accent-gold);
-        }
-        .step-title {
-            margin-top: 15px;
-            font-size: 1.3rem;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-        .step-card li {
-            line-height: 1.6;
-            margin-bottom: 8px;
-            text-align: left;
-            display: flex;
-            align-items: flex-start;
-        }
-        /* 竹プラン（ハイライト） */
-        #pricing .step-card:nth-child(2) {
-            border: 3px solid var(--accent-gold);
-            box-shadow: 0 20px 50px rgba(197, 160, 89, 0.3);
-        }
-
-        /* --- 8. Evidence --- */
-        .evidence-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
             text-align: center;
         }
-        .evidence-num {
-            color: #c5a059 !important;
-            font-weight: 800;
-            display: block;
-            font-size: 2.5rem;
-        }
-        .evidence-item p {
-            color: #1a2a6c !important;
-            font-weight: 600;
-            opacity: 1 !important;
-            margin-top: 10px;
-            text-shadow: none !important;
-        }
-        .mirary-comment {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #333;
-            /* 上の要素との間に余白を追加 */
-            margin-top: 60px !important; 
-        }
-        .mirary-comment p, .mirary-balloon {
-            color: #333 !important;
-            text-shadow: none !important;
-        }
-        .mirary-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid var(--highlight-pink);
-            flex-shrink: 0;
-            object-fit: cover;
-        }
-        .mirary-balloon {
-            font-size: 0.95rem;
-            line-height: 1.5;
+        @media (min-width: 820px) {
+            .hero-inner {
+                grid-template-columns: 1.35fr 1fr;
+                text-align: left;
+                gap: 44px;
+                align-items: start;
+            }
         }
 
-        /* --- 9. Voice Section --- */
-        .voice-container {
-            max-width: 1200px; /* 最大幅を制限する */
-            margin: 0 auto;    /* 左右中央に寄せる */
-            padding: 0 40px;   /* 左右に40pxの余白を強制的に作る */
-        }
-        
-        /* padding: 0 !important を追加して、画像をカードの端まで広げる */
-        .voice-card { 
-            padding: 0 !important; 
-            overflow: hidden; 
-            background: rgba(255, 255, 255, 0.94) !important;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .voice-image-wrapper { 
-            width: 100%; 
-            border-bottom: 1px solid rgba(0,0,0,0.05); 
-            line-height: 0; /* 画像下の隙間を消す */
-        }
-        
-        .voice-image { 
-            width: 100%; 
-            height: auto; 
-            display: block; /* インライン要素の隙間対策 */
-            object-fit: cover; 
-        }
-        
-        .voice-content { 
-            padding: 40px 30px; 
-            text-align: left; 
-        }
-        
-        .voice-highlight {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #1a2a6c;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            position: relative;
-            padding-left: 20px;
-            border-left: 5px solid var(--accent-gold);
-        }
-        .voice-footer {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.8rem;
-            margin-top: 20px;
-        }
+        /* --- 左カラム（テキスト） --- */
+        .hero-text { display: flex; flex-direction: column; }
 
-        /* --- 10. FAQ Section --- */
-        .faq-grid {
-            display: grid;
-            gap: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .faq-q {
-            color: #1a2a6c;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: baseline;
-        }
-        .faq-q-icon {
-            color: var(--accent-gold);
-            font-size: 1.5rem;
-            font-family: serif;
-            margin-right: 10px;
-            font-weight: 800;
-        }
-        .faq-a {
-            display: flex;
-            align-items: baseline;
-            font-size: 0.95rem;
-            color: #333;
-            line-height: 1.6;
-        }
-        .faq-a-icon {
-            color: var(--highlight-pink);
-            font-weight: bold;
-            margin-right: 10px;
-            font-family: serif;
-            font-size: 1.2rem;
-        }
-        .faq-header-wrapper {
-            position: relative;
+        .hero-badge {
             display: inline-block;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 50px;
+            background: var(--white);
+            border: 1.5px solid var(--pink-mid);
+            color: var(--pink);
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            letter-spacing: 0.04em;
+            align-self: flex-start;
         }
-        .faq-mirary-decoration {
-            position: absolute;
-            top: -40px;
-            right: 10%;
+        @media (max-width: 819px) {
+            .hero-badge { align-self: center; }
+        }
+
+        /* 誰向けか */
+        .hero-for {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--pink);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        /* メインコピー */
+        .hero-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2.0rem;
+            color: var(--text);
+            line-height: 1.55;
+            margin-bottom: 12px;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+        .hero-title .pink { color: var(--pink); }
+
+        /* スマホのみ表示する改行 */
+        .sp-br { display: inline; }
+        @media (min-width: 820px) { .sp-br { display: none; } }
+
+        /* スマホ専用CTA（説明文直後） */
+        .hero-cta-mobile {
+            display: none;
+        }
+        @media (max-width: 819px) {
+            .hero-cta-mobile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+                margin-top: 12px;
+                width: 100%;
+            }
+        }
+
+        /* ベネフィット文 */
+        .hero-benefit {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        /* 対象者タグ：2列グリッド */
+        .target-tags {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 0;
+        }
+        @media (max-width: 819px) {
+            .target-tags {
+                grid-template-columns: 1fr 1fr;
+                justify-items: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .target-tags { grid-template-columns: 1fr; }
+        }
+        .tag {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--white);
+            border: 1.5px solid var(--pink-mid);
+            color: var(--pink);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 8px 14px;
+            border-radius: 50px;
+            box-shadow: 0 2px 8px rgba(240,98,146,0.10);
+            white-space: nowrap;
+        }
+
+        /* CTAエリア（右カラムに移動） */
+        .hero-cta-wrap {
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: floating 3s ease-in-out infinite;
+            gap: 8px;
+            margin-top: 22px;
+            width: 100%;
         }
-        .faq-mirary-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 3px solid var(--accent-gold);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            object-fit: cover;
-            background: #fff;
-        }
-        .faq-balloon-deco {
-            background: #fff;
-            color: #1a2a6c;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        .hero-cta-btn {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #f06292, #e91e8c);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1.15rem;
+            border-radius: 60px;
+            box-shadow: 0 6px 24px rgba(240,98,146,0.40);
+            transition: transform 0.25s, box-shadow 0.25s;
+            letter-spacing: 0.04em;
+            text-align: center;
+            line-height: 1.4;
             position: relative;
-            white-space: nowrap;
+            overflow: hidden;
         }
-        .faq-balloon-deco::after {
+        .hero-cta-btn::after {
             content: "";
             position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 5px 5px 0;
-            border-style: solid;
-            border-color: #fff transparent transparent transparent;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+        .hero-cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(240,98,146,0.50);
+        }
+        .hero-cta-btn:hover::after { transform: translateX(100%); }
+
+        .hero-note {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            text-align: center;
         }
 
-        /* --- 11. CTA & Footer --- */
-        .cta-box {
-            border: 2px solid var(--accent-gold);
-            padding: 40px 20px;
+        /* --- 右カラム（写真 + CTA） --- */
+        .hero-photo-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        @media (min-width: 820px) {
+            .hero-photo-col { padding-top: 44px; }
+        }
+        .hero-photo-wrap {
             position: relative;
+            display: inline-block;
         }
-        footer {
-            color: #888;
-            text-align: center;
-            padding: 20px 0;
-            font-size: 0.8rem;
-        }
-
-        /* --- 12. Background Effects --- */
-        .magical-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -10;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-        .magical-bg::before, .magical-bg::after {
-            content: '';
-            position: absolute;
+        .hero-photo {
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.7;
-            mix-blend-mode: screen;
-            animation: moveAura 20s infinite alternate ease-in-out;
+            border: 4px solid var(--white);
+            box-shadow: 0 0 0 4px var(--pink-mid), 0 6px 24px rgba(240,98,146,0.20);
+            object-fit: cover;
+            display: block;
         }
-        .magical-bg::before {
-            top: -20%;
-            left: -20%;
-            width: 70vmax;
-            height: 70vmax;
-            background: radial-gradient(circle, var(--accent-gold), var(--highlight-pink), transparent);
+        .hero-mirary {
+            position: absolute;
+            bottom: 2px;
+            right: -10px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 2px var(--pink-mid);
+            object-fit: cover;
         }
-        .magical-bg::after {
-            bottom: -20%;
-            right: -20%;
-            width: 60vmax;
-            height: 60vmax;
-            background: radial-gradient(circle, #4a00e0, #8e2de2, transparent);
-            animation-delay: -10s;
-        }
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -5;
-            overflow: hidden;
-        }
-        .particle { position: absolute; border-radius: 50%; opacity: 0; animation: floatUp linear infinite; }
-        .p-gold { background: #ffd700; box-shadow: 0 0 5px #ffd700; }
-        .p-sakura { background: #ffb7c5; border-radius: 100% 0 100% 0; animation: floatSakura linear infinite; }
-
-        /* --- Animations --- */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes moveAura {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(10%, 15%) scale(1.1); }
-            100% { transform: translate(-10%, 5%) scale(1); }
-        }
-        @keyframes rotateOrbit {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        @keyframes moveSparkle {
-            0% { offset-distance: 0%; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { offset-distance: 100%; opacity: 0; }
-        }
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            20% { opacity: 0.8; } 80% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-        }
-        @keyframes floatSakura {
-            0% { transform: translateY(100vh) rotate(0deg) translateX(0); opacity: 0; }
-            10% { opacity: 0.9; } 90% { opacity: 0.9; }
-            100% { transform: translateY(-10vh) rotate(360deg) translateX(50px); opacity: 0; }
-        }
-
-        /* --- 13. Responsive Queries (Must be last to override) --- */
-        @media (min-width: 768px) {
-            /* PC表示時のコンテナ余白を調整：94%幅 + 最大1100px */
-            .container {
-                width: 94%; 
-                max-width: 1100px;
-                padding: 0; 
-                margin: 0 auto;
-            }
-
-            /* .voice-container は個別に幅を指定しているため、ここで微調整 */
-            .voice-container {
-                padding: 0 40px !important; 
-            }
-
-            .hero-title { font-size: 3rem; }
-            .hero-title span { font-size: 1.8rem; display: block; margin-top: 15px; }
-            
-            .steps-grid, .evidence-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px; /* 隙間を少し詰めてカードの幅を確保 */
-            }
-            .evidence-grid {
-                grid-template-columns: 1fr 1fr; /* Evidenceは2列 */
-            }
-            
-            /* グリッド内のカードの余白調整 */
-            .steps-grid .step-card, 
-            .evidence-grid .evidence-item { 
-                margin-bottom: 0; 
-                height: 100%; /* 高さ揃え */
-                padding: 40px 20px !important; /* 文字スペース確保のためパディング縮小 */
-            }
-            
-            /* ▼▼▼ PC版での輪のサイズ修正 ▼▼▼ */
-            .hero-visual-orbit {
-                width: 450px; /* コンテナ自体を大きく */
-                height: 450px;
-            }
-            /* 輪も合わせて大きくする */
-            .hero-visual-orbit::before {
-                width: 500px;
-                height: 500px;
-            }
-            .hero-visual-orbit::after {
-                width: 460px;
-                height: 460px;
-            }
-            /* 光の粒の軌道もPCサイズに合わせる (半径225px) */
-            .orbit-sparkle {
-                offset-path: path('M 225,0 A 225,225 0 1,1 224.9,0 Z');
-            }
-
-            .char-sayucchi { width: 220px; height: 220px; top: 40px; left: 40px; }
-            .char-mirary { width: 170px; height: 170px; bottom: 40px; right: 40px; }
-        }
-
-        @media (max-width: 767px) {
-            .faq-mirary-decoration {
-                position: relative;
-                top: 0;
-                right: auto;
-                margin-top: 10px;
-                flex-direction: row;
-                justify-content: center;
-                gap: 10px;
-            }
-            .faq-balloon-deco {
-                margin-bottom: 0;
-                order: 2;
-            }
-            .faq-balloon-deco::after {
-                bottom: auto;
-                left: -5px;
-                top: 50%;
-                transform: translateY(-50%) rotate(90deg);
-                border-width: 5px 5px 0;
-            }
-            .faq-mirary-img {
-                width: 60px;
-                height: 60px;
-                order: 1;
-            }
-        }
-
-        /* --- 信頼の魔法陣バナーのスタイル --- */
-
-        /* バナー全体の外枠 */
-        .trust-official-container {
-            margin-top: 30px; /* 上の文章との間隔 */
-            padding: 25px;
-            /* LPの夜空に合わせた深い青紫の背景 */
-            background: linear-gradient(145deg, #1a1a2e, #2a2a4e);
-            /* 信頼の証である黄金の枠線 */
-            border: 2px solid #d4af37;
-            border-radius: 12px; /* 角丸 */
+        .hero-name-label {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            line-height: 1.55;
             text-align: center;
-            /* ほのかな黄金の輝き */
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-            max-width: 600px; /* 横幅が広がりすぎないように */
-            margin-left: auto;
-            margin-right: auto;
+        }
+        .hero-name-label strong {
+            display: block;
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 2px;
         }
 
-        /* メッセージ部分 */
-        .trust-message {
-            color: #f0f0f0; /* 白文字 */
-            font-size: 1rem;
+        @media (min-width: 820px) {
+            .hero-title   { font-size: 2.5rem; }
+            .hero-photo   { width: 190px; height: 190px; }
+            .hero-mirary  { width: 68px; height: 68px; right: -12px; }
+        }
+        @media (min-width: 1024px) {
+            .hero-title   { font-size: 2.8rem; }
+            .hero-photo   { width: 200px; height: 200px; }
+        }
+
+        /* =============================================
+           2. できること（3カード）
+        ============================================= */
+        .features { background: var(--white); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .feature-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            border: 1.5px solid var(--border);
+            transition: transform 0.25s, box-shadow 0.25s;
+            box-shadow: var(--shadow-card);
+        }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(240,98,146,0.15); }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 14px;
+        }
+        .feature-card h3 {
+            font-size: 1.05rem;
+            color: var(--text);
+            margin-bottom: 10px;
             line-height: 1.6;
-            margin-bottom: 20px;
+        }
+        .feature-card h3 span {
+            color: var(--pink);
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+        .feature-card-accent {
+            display: block;
+            width: 36px; height: 3px;
+            border-radius: 10px;
+            margin: 0 auto 16px;
+        }
+        .accent-pink  { background: var(--pink); }
+        .accent-blue  { background: var(--blue); }
+        .accent-gold  { background: var(--gold); }
+
+        /* =============================================
+           3. 信頼・実績
+        ============================================= */
+        .evidence { background: linear-gradient(135deg, #f8f0ff, #e8f0fb); }
+
+        .evidence-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 36px;
+        }
+        .ev-badge {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            min-width: 160px;
+        }
+        .ev-num {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--pink);
+            line-height: 1.2;
+        }
+        .ev-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .evidence-spa {
+            background: var(--white);
+            border: 1.5px solid var(--pink-mid);
+            border-radius: var(--radius);
+            padding: 20px 28px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px; /* アイコンと文字の間隔 */
+            gap: 16px;
+            max-width: 560px;
+            margin: 0 auto 24px;
+            box-shadow: var(--shadow);
         }
+        .spa-icon { font-size: 2rem; flex-shrink: 0; }
+        .spa-text { font-size: 0.92rem; color: var(--text); line-height: 1.6; }
+        .spa-text strong { color: var(--pink); }
 
-        .trust-icon {
-            font-size: 1.5rem;
-        }
-
-        /* リンクボタン本体 */
-        .trust-official-link {
+        .csnet-link {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            /* ボタンの背景は少し明るくして目立たせる */
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            color: #d4af37; /* 文字は黄金色 */
-            text-decoration: none; /* 下線を消す */
-            padding: 15px 25px;
-            border-radius: 30px; /* 丸いボタンの形 */
-            font-weight: bold;
-            transition: all 0.3s ease; /* ホバー時のアニメーション */
+            background: var(--white);
+            border: 1px solid rgba(91,143,201,0.35);
+            border-radius: var(--radius-sm);
+            padding: 14px 22px;
+            max-width: 560px;
+            margin: 0 auto;
+            color: var(--blue);
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: var(--shadow-card);
+        }
+        .csnet-link:hover { background: var(--blue-light); transform: translateY(-2px); }
+        .csnet-link-arrow { font-size: 1.1rem; }
+
+        /* =============================================
+           4. ストーリー
+        ============================================= */
+        .story { background: var(--white); }
+
+        .story-card {
+            max-width: 760px;
+            margin: 0 auto;
+            background: var(--bg);
+            border-left: 5px solid var(--pink);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 32px 36px;
+            box-shadow: var(--shadow-card);
+        }
+        .story-card p {
+            font-size: 0.97rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 16px;
+        }
+        .story-card p:last-child { margin-bottom: 0; }
+        .story-name {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            text-align: right;
+            margin-top: 20px;
+            font-style: italic;
         }
 
-        /* マウスを乗せた時の動き */
-        .trust-official-link:hover {
-            background: rgba(212, 175, 55, 0.2);
-            transform: translateY(-3px); /* 少し浮き上がる */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        /* =============================================
+           5. 3ステップ
+        ============================================= */
+        .steps { background: linear-gradient(135deg, #fff8fb, #e8f0fb); }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .steps-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
-        .link-text {
+        .step-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            position: relative;
+            padding-top: 46px;
+        }
+        .step-num {
+            position: absolute;
+            top: -20px;
+            left: 24px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), #e91e8c);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(240,98,146,0.35);
+        }
+        .step-card h3 {
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .step-card p {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+
+        /* =============================================
+           6. お客様の声
+        ============================================= */
+        .voice { background: var(--white); }
+
+        .voice-main-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            margin-bottom: 32px;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .voice-main-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .voice-main-body {
+            padding: 28px 32px;
+        }
+        .voice-quote {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.7;
+            border-left: 4px solid var(--pink);
+            padding-left: 16px;
+            margin-bottom: 14px;
+        }
+        .voice-main-body p {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+
+        .voice-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .voice-cards-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .voice-mini-card {
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 24px 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+        }
+        .voice-mini-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .voice-mini-label .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-pink { background: var(--pink); }
+        .dot-blue { background: var(--blue); }
+        .dot-gold { background: var(--gold); }
+
+        .voice-mini-card p {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.7;
+            font-style: italic;
+        }
+        .voice-footer-note {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-sub);
+            margin-top: 24px;
+        }
+
+        /* =============================================
+           7. プラン
+        ============================================= */
+        .pricing { background: linear-gradient(135deg, #fff0f5, #e8f0fb); }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 28px;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        @media (min-width: 640px) {
+            .plans-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .plan-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            position: relative;
+            transition: transform 0.25s;
+        }
+        .plan-card:hover { transform: translateY(-4px); }
+
+        .plan-card.featured {
+            border-color: var(--pink);
+            box-shadow: 0 8px 32px rgba(240,98,146,0.20);
+        }
+        .plan-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--pink), #e91e8c);
+            color: var(--white);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 5px 20px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(240,98,146,0.35);
+        }
+        .plan-name {
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .plan-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .plan-target {
+            font-size: 0.82rem;
+            color: var(--pink);
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding: 5px 14px;
+            background: var(--pink-light);
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+        .plan-price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-sub);
+        }
+        .plan-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+        .plan-features {
+            list-style: none;
             text-align: left;
-            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+        .plan-features li {
+            font-size: 0.9rem;
+            color: var(--text);
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.5;
+        }
+        .plan-features li .check { color: var(--pink); font-weight: 700; flex-shrink: 0; }
+        .plan-card .btn-pink,
+        .plan-card .btn-outline { width: 100%; }
+
+        /* =============================================
+           8. stand.fm 導線
+        ============================================= */
+        .standfm { background: var(--white); }
+
+        .standfm-card {
+            max-width: 680px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #fff0f5, #fce4ec);
+            border: 2px solid var(--pink-mid);
+            border-radius: var(--radius);
+            padding: 40px 36px;
+            text-align: center;
+            box-shadow: 0 6px 28px rgba(240,98,146,0.15);
+        }
+        .standfm-icon { font-size: 3rem; margin-bottom: 12px; }
+        .standfm-card h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .standfm-card p {
+            font-size: 0.92rem;
+            color: var(--text-sub);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+        .standfm-card .btn-pink {
+            font-size: 1rem;
+            padding: 14px 36px;
         }
 
-        .link-arrow {
-            font-size: 1.2rem;
-        }
+        /* =============================================
+           9. FAQ（アコーディオン）
+        ============================================= */
+        .faq { background: linear-gradient(135deg, #f8f0ff, #e8f0fb); }
 
-        /* スマホ用の改行設定（PCでは見えなくなる） */
-        .sp-br {
+        .faq-list {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
+        .faq-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 20px 24px;
+            text-align: left;
+            font-family: inherit;
+        }
+        .faq-btn:hover { background: var(--pink-light); }
+
+        .faq-q-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            flex: 1;
+        }
+        .faq-q-icon {
+            color: var(--pink);
+            font-size: 1.1rem;
+            font-weight: 800;
+            font-family: serif;
+            flex-shrink: 0;
+            line-height: 1.5;
+        }
+        .faq-q-text {
+            font-size: 0.97rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .faq-arrow {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--pink-light);
+            border-radius: 50%;
+            transition: transform 0.3s;
+            color: var(--pink);
+            font-size: 0.75rem;
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+        .faq-body {
             display: none;
+            padding: 0 24px 22px;
+        }
+        .faq-item.open .faq-body { display: block; }
+
+        .faq-a-wrap {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+        .faq-a-icon {
+            color: var(--blue);
+            font-size: 1.1rem;
+            font-weight: 800;
+            font-family: serif;
+            flex-shrink: 0;
+            line-height: 1.5;
+        }
+        .faq-a-text {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.75;
         }
 
-        /* --- スマホでの表示調整 --- */
+        /* =============================================
+           10. CTA
+        ============================================= */
+        .cta-section { background: var(--white); }
+
+        .cta-box {
+            max-width: 680px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #fff0f5, #fce4ec);
+            border: 2px solid var(--pink-mid);
+            border-radius: var(--radius);
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: 0 6px 28px rgba(240,98,146,0.15);
+        }
+        .cta-box h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .cta-box p {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            margin-bottom: 28px;
+            line-height: 1.8;
+        }
+        .cta-box .btn-pink {
+            font-size: 1.25rem;
+            padding: 18px 48px;
+        }
+        .cta-note {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            margin-top: 14px;
+        }
+
+        /* =============================================
+           11. フッター
+        ============================================= */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 28px 20px;
+            font-size: 0.8rem;
+        }
+        footer a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: underline;
+            margin: 0 6px;
+        }
+
+        /* =============================================
+           レスポンシブ共通
+        ============================================= */
         @media (max-width: 600px) {
-            .trust-official-container {
-                padding: 20px 15px;
-            }
-            .trust-message {
-                flex-direction: column; /* アイコンを上に */
-                font-size: 0.9rem;
-            }
-            .trust-official-link {
-                padding: 12px 20px;
-            }
-            .link-text {
-                font-size: 0.85rem;
-            }
-            .sp-br {
-                display: block; /* スマホでは改行を有効に */
-            }
+            .sec-title      { font-size: 1.65rem; }
+            .hero-title     { font-size: 2.0rem; }
+            .hero-for       { font-size: 1rem; }
+            .hero-benefit   { font-size: 1rem; }
+            .hero-cta-btn   { font-size: 1.1rem; padding: 15px 20px; }
+            .section-pad    { padding: 48px 0; }
+            .cta-box, .standfm-card { padding: 32px 20px; }
+            .story-card     { padding: 24px 22px; }
+            .hero-photo     { width: 140px; height: 140px; }
+            .hero-mirary    { width: 52px; height: 52px; }
         }
     </style>
 </head>
 <body>
-    <div class="magical-bg"></div>
-    
-    <!-- 黄金と桜の粒子エフェクト -->
-    <div class="particles-container">
-        <!-- 黄金の粒子 (ランダム配置) -->
-        <div class="particle p-gold" style="left: 10%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: 0s;"></div>
-        <div class="particle p-gold" style="left: 30%; width: 6px; height: 6px; animation-duration: 18s; animation-delay: 2s;"></div>
-        <div class="particle p-gold" style="left: 50%; width: 3px; height: 3px; animation-duration: 20s; animation-delay: 5s;"></div>
-        <div class="particle p-gold" style="left: 70%; width: 5px; height: 5px; animation-duration: 17s; animation-delay: 1s;"></div>
-        <div class="particle p-gold" style="left: 90%; width: 4px; height: 4px; animation-duration: 22s; animation-delay: 4s;"></div>
-        
-        <!-- 桜の花びら (ランダム配置) -->
-        <div class="particle p-sakura" style="left: 15%; width: 8px; height: 12px; animation-duration: 12s; animation-delay: 1s;"></div>
-        <div class="particle p-sakura" style="left: 35%; width: 10px; height: 14px; animation-duration: 16s; animation-delay: 3s;"></div>
-        <div class="particle p-sakura" style="left: 55%; width: 7px; height: 10px; animation-duration: 19s; animation-delay: 6s;"></div>
-        <div class="particle p-sakura" style="left: 75%; width: 9px; height: 13px; animation-duration: 14s; animation-delay: 0s;"></div>
-        <div class="particle p-sakura" style="left: 95%; width: 8px; height: 11px; animation-duration: 17s; animation-delay: 2s;"></div>
-    </div>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="container hero-content">
-            <div class="logo-area">
-                <!-- 
-                  【画像表示について】
-                  以下の「src="ロゴ.jpg"」は、お手元に同じファイルがある場合に表示されます。
-                  プレビュー画面では表示されないため、「onerror」で仮画像を表示するようにしています。
-                -->
-                <img src="https://i.postimg.cc/g260DCBP/ロゴ.png" alt="さゆっちAIギルド ロゴ" class="logo-img" onerror="this.src='https://placehold.co/150x150/c5a059/ffffff?text=Logo'">
+    <!-- ===== 0. 固定ナビゲーション ===== -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <a href="#top">
+                    <img src="https://i.postimg.cc/g260DCBP/ロゴ.png" alt="さゆっちAIギルド ロゴ"
+                         onerror="this.src='https://placehold.co/40x40/f06292/ffffff?text=S'">
+                </a>
             </div>
+            <ul class="nav-menu">
+                <li><a href="#features">できること</a></li>
+                <li><a href="#pricing">プラン</a></li>
+                <li><a href="#voice">お客様の声</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="https://stand.fm/channels/629d96870984f586c273bee9" target="_blank" rel="noopener noreferrer">🎙️ 配信</a></li>
+            </ul>
+            <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="nav-cta" target="_blank" rel="noopener noreferrer">
+                ✉ 無料相談する
+            </a>
+        </div>
+    </nav>
 
-            <span class="hero-tagline">📰 週刊SPA!（2026年4月21日号）・日刊SPA! Web版 掲載</span>
+    <!-- ===== 1. Hero（ファーストビュー）===== -->
+    <header id="top" class="hero">
+        <div class="container">
+            <div class="hero-inner">
 
-            <h1 class="hero-title">
-                <span class="nobrk">「わからない」を笑わない、</span>
-                <span>一番優しいAIの<br>相談窓口</span>
-            </h1>
+                <!-- 左カラム：テキスト -->
+                <div class="hero-text">
 
-            <!-- Visual: Sayucchi & Mirary with Orbit Magic -->
-            <div class="hero-visual-orbit">
-                <!-- 光のしずく -->
-                <div class="orbit-sparkle"></div>
-                
-                <!-- さゆっち & ミラりー -->
-                <div class="hero-img-wrapper">
-                    <!-- さゆっち画像： onerror で仮画像へフォールバック -->
-                    <img src="https://i.postimg.cc/ZR9Zbpkw/2025_12_20_プロフィール写真.png" alt="三谷小百合（さゆっち）" class="char-img char-sayucchi" onerror="this.src='https://placehold.co/200x200/f06292/ffffff?text=Sayucchi'">
-                    
-                    <!-- ミラりー画像： onerror で仮画像へフォールバック -->
-                    <img src="https://i.postimg.cc/Gt1fWybb/アイコン.png" alt="猫耳少女ミラりー" class="char-img char-mirary" onerror="this.src='https://placehold.co/150x150/0d1b3e/f06292?text=Mirary'">
+                    <span class="hero-badge">📰 週刊SPA!（2026年4月21日号）・日刊SPA! Web版 掲載</span>
+
+                    <p class="hero-for">📣 50代・60代のAI初心者さんへ</p>
+
+                    <h1 class="hero-title">
+                        「わからない」を<br class="sp-br">笑わない。<br>
+                        <span class="pink">一番やさしい</span><br>
+                        AIの相談窓口
+                    </h1>
+
+                    <p class="hero-benefit">
+                        PCが苦手でも、AIが怖くても大丈夫。<br>
+                        専門用語なし・売り込みなしで、<br>
+                        あなたのペースで一緒に進みます。
+                    </p>
+
+                    <!-- スマホ専用CTA（PCでは非表示） -->
+                    <div class="hero-cta-mobile">
+                        <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="hero-cta-btn"
+                           target="_blank" rel="noopener noreferrer">
+                            個別無料相談に申し込む
+                        </a>
+                        <p class="hero-note">🕐 初回30分・完全無料・売り込みなし</p>
+                    </div>
+
+                    <div class="target-tags">
+                        <span class="tag">✅ PCが苦手な方</span>
+                        <span class="tag">✅ 50代・60代の方</span>
+                        <span class="tag">✅ AIを仕事や生活に活かしたい方</span>
+                        <span class="tag">✅ はじめて一歩を踏み出したい方</span>
+                    </div>
+
                 </div>
-            </div>
 
-            <div style="margin-top: 40px;">
-                <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="btn-main" target="_blank" rel="noopener noreferrer"><span>個別無料相談に申し込む</span></a>
-                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">初回30分・完全無料・売り込みなし</p>
+                <!-- 右カラム：写真 + CTA -->
+                <div class="hero-photo-col">
+
+                    <div class="hero-photo-wrap">
+                        <img src="https://i.postimg.cc/ZR9Zbpkw/2025_12_20_プロフィール写真.png"
+                             alt="三谷小百合（さゆっち）" class="hero-photo"
+                             onerror="this.src='https://placehold.co/200x200/f06292/ffffff?text=Sayucchi'">
+                        <img src="https://i.postimg.cc/Gt1fWybb/アイコン.png"
+                             alt="猫耳少女ミラりー" class="hero-mirary"
+                             onerror="this.src='https://placehold.co/58x58/0d1b3e/f06292?text=M'">
+                    </div>
+
+                    <p class="hero-name-label">
+                        <strong>三谷小百合（さゆっち）</strong>
+                        岡山在住 65歳・生成AIコンサルタント
+                    </p>
+
+                    <div class="hero-cta-wrap">
+                        <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="hero-cta-btn"
+                           target="_blank" rel="noopener noreferrer">
+                            個別無料相談に申し込む
+                        </a>
+                        <p class="hero-note">🕐 初回30分・完全無料・売り込みなし</p>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </header>
 
-    <!-- Story Section -->
-    <section class="section-padding story-section">
+    <!-- ===== 2. できること（3カード）===== -->
+    <section id="features" class="features section-pad">
         <div class="container">
-            <div class="story-wrapper">
-                <h2 class="story-header">「AIって、私には難しそう…」<br>そう思いながら、でも何かしなきゃという焦りを抱えて、毎日を過ごしていました。</h2>
-                
-                <div class="story-text">
-                    <p>転機は「生成AI」でした。<br>
-                   最初は正直、意味がわかりませんでした。
-                        でも、料理と同じで「レシピ」があると知ったんです。</p>
-
-                    <p>少しずつ、できることが増え、
-                    気づけば「家にいながら仕事になる」状態に変わっていました。</p>
-
-                   
-                    <!-- 追加：C'snet津山 信頼バナー -->
-                    <div class="trust-official-container">
-                        <div class="trust-message">
-                            <span class="trust-icon">🛡️</span>
-                            C'snet津山にも所属し、<br class="sp-br">地域に根ざした活動をしています。
-                        </div>
-                        <a href="https://tsuyama-biz.jp/csnet/member/mitani/" target="_blank" rel="noopener noreferrer" class="trust-official-link">
-                            <span class="link-text">公式プロフィールページを確認する<br class="sp-br">（C'snet津山クリエイティブ人材ネットワーク）</span>
-                            <span class="link-arrow">→</span>
-                        </a>
-                    </div>
-
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">さゆっちギルドで<br>できること</h2>
+                <span class="pink-line"></span>
+                <p class="sec-sub" style="margin-top:14px;">専門用語なし・手厚いサポートで、初めてでも安心です</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-card-accent accent-pink"></span>
+                    <div class="feature-icon">🤝</div>
+                    <h3><span>AIの使い方を</span><br>やさしく教えてもらえる</h3>
+                    <p>専門用語はいっさい使いません。「お料理のレシピ」のような言葉で、ChatGPTやAIツールの使い方を丁寧に解説します。</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-card-accent accent-blue"></span>
+                    <div class="feature-icon">📱</div>
+                    <h3><span>SNSやコンテンツ作り</span>に<br>AIを活用できる</h3>
+                    <p>インスタ投稿・動画・ブログ文章をAIと一緒に作る実践スキルを身につけられます。時間と手間を大きく減らせます。</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-card-accent accent-gold"></span>
+                    <div class="feature-icon">💬</div>
+                    <h3><span>わからないをそのまま</span>に<br>しない仲間がいる</h3>
+                    <p>Discordコミュニティで仲間と一緒に学べます。「こんな初歩的なこと聞いていいの？」が大歓迎の場所です。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Reason Section -->
-    <section id="reason" class="section-padding">
+    <!-- ===== 3. 信頼・実績 ===== -->
+    <section id="evidence" class="evidence section-pad">
         <div class="container">
-            <h2 class="section-title">私が「難しいAI」を
-やさしく伝えられる理由</h2>
-            <div class="steps-grid">
-                
-                <!-- Reason 1 -->
-                <div class="step-card" style="border-top: 5px solid var(--highlight-pink);">
-                    <div style="font-size: 3rem; text-align: center; margin-bottom: 10px;">🤝</div>
-                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 1.1rem; text-align: center; line-height: 1.6;">
-                        <span class="word-keep"><span class="highlight-bg">「できない人の気持ち」</span>が</span><br>
-                        <span class="word-keep">日本一わかる伴走者だから</span>
-                    </h3>
-                    <p style="text-align: left; font-size: 0.95rem;">
-                        私は、生まれついてのITエリートではありません。40年間、学校の給食室で子供たちの笑顔のために包丁を振るい続けてきた「アナログ人間」です。<br><br>
-                        だからこそ、あなたがどこでつまずき、何に不安を感じるのか、痛いほどわかります。「わからない」を笑わない。それが私のギルドの掟です。
-                    </p>
-                </div>
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">確かな実績と<br>地域に根ざした活動</h2>
+                <span class="pink-line"></span>
+            </div>
 
-                <!-- Reason 2 -->
-                <div class="step-card" style="border-top: 5px solid var(--accent-gold);">
-                    <div style="font-size: 3rem; text-align: center; margin-bottom: 10px;">🍳</div>
-                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 1.1rem; text-align: center; line-height: 1.6;">
-                        <span class="word-keep">難しい専門用語を</span><br>
-                        <span class="word-keep"><span class="highlight-bg">「お料理レシピ」</span>に変える</span><span class="word-keep">翻訳者だから</span>
-                    </h3>
-                    <p style="text-align: left; font-size: 0.95rem;">
-                        AIの世界はカタカナや専門用語ばかり。でも、私の手にかかればそれは「献立」に変わります。「プロンプトは味付けのコツ」「AIは頼りになる調理助手」。<br><br>
-                        はじめてでも、40年料理を続けてきたあなたでも、直感的に理解できる魔法の言葉で伝えます。
-                    </p>
+            <div class="evidence-badges">
+                <div class="ev-badge">
+                    <span class="ev-num">90回+</span>
+                    <span class="ev-label">セミナー登壇・<br>伴走支援実績</span>
                 </div>
-
-                <!-- Reason 3 -->
-                <div class="step-card" style="border-top: 5px solid var(--primary-blue);">
-                    <div style="font-size: 3rem; text-align: center; margin-bottom: 10px;">✨</div>
-                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 1.1rem; text-align: center; line-height: 1.6;">
-                        <span class="word-keep"><span class="highlight-bg">「還暦からの第二章」</span>を</span><br>
-                        <span class="word-keep">自ら体現しているから</span>
-                    </h3>
-                    <p style="text-align: left; font-size: 0.95rem;">
-                        「もう若くないから」という言葉を、私は捨てました。60歳を過ぎてからAIという魔法に出会い、私の世界は一変しました。<br><br>
-                        私はただの講師ではありません。「人生はいつからでも、どこからでも輝ける」ことを証明し続ける、あなたの一歩先を歩む伴走者です。
-                    </p>
+                <div class="ev-badge">
+                    <span class="ev-num">65歳</span>
+                    <span class="ev-label">現役コンサルタント<br>として活動中</span>
                 </div>
+                <div class="ev-badge">
+                    <span class="ev-num">完全在宅</span>
+                    <span class="ev-label">家にいながら<br>仕事になった実績</span>
+                </div>
+            </div>
 
+            <div class="evidence-spa">
+                <span class="spa-icon">📰</span>
+                <p class="spa-text"><strong>週刊SPA!（2026年4月21日号）</strong>および日刊SPA! Web版に掲載。メディアにも注目される活動を続けています。</p>
+            </div>
+
+            <a href="https://tsuyama-biz.jp/csnet/member/mitani/" target="_blank" rel="noopener noreferrer" class="csnet-link">
+                <span>🛡️ C'snet津山クリエイティブ人材ネットワーク｜公式プロフィールを確認する</span>
+                <span class="csnet-link-arrow">→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== 4. ストーリー ===== -->
+    <section id="story" class="story section-pad">
+        <div class="container">
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">「AIって、私には難しそう」<br>と思っていたのは、私自身でした。</h2>
+                <span class="pink-line"></span>
+            </div>
+            <div class="story-card">
+                <p>40年間、給食室で子供たちの笑顔のために働き続けた「アナログ人間」の私が、60歳を過ぎてAIという魔法に出会いました。</p>
+                <p>最初は意味すらわかりませんでした。でも「料理と同じで、レシピがある」と気づいてから、少しずつできることが増えていきました。</p>
+                <p>今は、家にいながら仕事になる状態に変わっています。<br>だからこそ、「どこでつまずくか」「何が不安か」を誰よりもわかります。<br>「わからない」を笑わない。それが私のギルドの掟です。</p>
+                <p class="story-name">― 三谷小百合（さゆっち）</p>
             </div>
         </div>
     </section>
 
-    <!-- 3 Steps Section -->
-    <section class="section-padding steps-section">
+    <!-- ===== 5. 3ステップ ===== -->
+    <section id="steps" class="steps section-pad">
         <div class="container">
-            <h2 class="section-title">「家でできるAI収入までの3ステップ」</h2>
-            
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">家でできるAI活用<br>3つのステップ</h2>
+                <span class="pink-line"></span>
+                <p class="sec-sub" style="margin-top:14px;">一歩ずつ、あなたのペースで進めます</p>
+            </div>
             <div class="steps-grid">
-                <!-- Step 1 -->
                 <div class="step-card">
                     <div class="step-num">01</div>
-                    <h3 class="step-title">AIに伝える「言葉の型」を覚える<br>（プロンプト＝指示の出し方）</h3>
-                    <p>AIは優秀なシェフですが、注文の仕方が悪ければ美味しい料理は出てきません。「どんな言葉をかければ、最高の成果物が出るか」。その秘伝のレシピをテンプレート化してお渡しします。</p>
+                    <h3>AIへの「伝え方の型」を覚える</h3>
+                    <p>AIは優秀な助手ですが、伝え方にコツがあります。そのレシピをテンプレートでお渡しします。すぐに使えます。</p>
                 </div>
-
-                <!-- Step 2 -->
                 <div class="step-card">
                     <div class="step-num">02</div>
-                    <h3 class="step-title">一人で頑張らない仕組みを作る<br>（動画・画像・投稿の流れ）</h3>
-                    <p>一つ一つ手作業で作る<span class="word-keep">必要は</span><span class="word-keep">ありません。</span>ミラリィのようなキャラクター動画や、美しいショート動画を「量産」する仕組みを構築。あなたの時間を守りながら、コンテンツを生み出し続けます。</p>
+                    <h3>一人で頑張らない仕組みを作る</h3>
+                    <p>投稿や動画を「量産」できる仕組みを構築します。あなたの時間を守りながら、コンテンツを生み出し続けられます。</p>
                 </div>
-
-                <!-- Step 3 -->
                 <div class="step-card">
                     <div class="step-num">03</div>
-                    <h3 class="step-title"><span class="word-keep">「お願いされる形」に整える</span><br><span class="word-keep">（高く売るより、</span><span class="word-keep">選ばれる）</span></h3>
-                    <p>ただ作るだけでは稼げません。「あなたにお願いしたい」と言われるための商品パッケージ術と、クラウドソーシング等で高単価案件を獲得する信頼構築の極意を伝授します。</p>
+                    <h3>「選ばれる形」に整えていく</h3>
+                    <p>「あなたにお願いしたい」と言われるための商品パッケージ術と、高単価案件の獲得に向けた信頼構築の考え方を伝授します。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="section-padding">
+    <!-- ===== 6. お客様の声 ===== -->
+    <section id="voice" class="voice section-pad">
         <div class="container">
-            <h2 class="section-title">選べる2つのプラン</h2>
-            <div class="steps-grid" style="grid-template-columns: repeat(2, minmax(0, 400px)); justify-content: center; max-width: 880px; margin: 0 auto;">
-                
-                <!-- Plan: Ume -->
-                <div class="step-card" style="border-top: 8px solid #ccc;">
-                    <div class="step-num" style="background:#666; border-color: #999;">梅</div>
-                    <h3 class="step-title">のぞき見プラン
-                    （雰囲気を知りたい方へ）</h3>
-                    <p class="text-center" style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">月額 980円</p>
-                    <ul style="font-size: 0.9rem; margin: 20px 0; list-style: none; padding: 0; text-align: left;">
-                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">厳選AI</span><span class="word-keep">ニュース要約</span></li>
-                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">秘伝の</span><span class="word-keep">プロンプト図鑑</span></li>
-                        <li>✅ 過去記事の全閲覧権限</li>
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">ご参加された方の声</h2>
+                <span class="pink-line"></span>
+            </div>
+
+            <div class="voice-main-card">
+                <img src="https://i.postimg.cc/Dzq8mnQ6/嬉しいお言葉をいただきました.png"
+                     alt="お客様からのメッセージ" class="voice-main-img">
+                <div class="voice-main-body">
+                    <p class="voice-quote">「オンラインセミナーはどうしてもついていけないことが多いですが、さゆっちさんのご説明がとてもわかりやすく、安心して視聴できました」</p>
+                    <p>日本語教師を目指す中で、AIを使って教材イラストを作りたいという夢への第一歩を、一緒に踏み出していただけました。アーカイブがある安心感が申し込みの決め手に。</p>
+                </div>
+            </div>
+
+            <div class="voice-cards-grid">
+                <div class="voice-mini-card">
+                    <div class="voice-mini-label">
+                        <span class="dot dot-pink"></span>
+                        <span style="color:var(--pink);">✨ 安心の声</span>
+                    </div>
+                    <p>「AIってこういうことか！とやっと腑に落ちました。実感がなかった私でもこれなら使えます！」</p>
+                </div>
+                <div class="voice-mini-card">
+                    <div class="voice-mini-label">
+                        <span class="dot dot-blue"></span>
+                        <span style="color:var(--blue);">✨ 驚きの声</span>
+                    </div>
+                    <p>「インスタ投稿が目から鱗でした！無料ツールでここまでできるなんて驚きです。」</p>
+                </div>
+                <div class="voice-mini-card">
+                    <div class="voice-mini-label">
+                        <span class="dot dot-gold"></span>
+                        <span style="color:var(--gold);">✨ 実践の声</span>
+                    </div>
+                    <p>「中学生の子供にも教えてあげたいほど分かりやすい。仕事にも遊びにも活用したいです！」</p>
+                </div>
+            </div>
+
+            <p class="voice-footer-note">※プライバシー保護のため、一部お名前などを伏せて掲載しております。</p>
+        </div>
+    </section>
+
+    <!-- ===== 7. プラン ===== -->
+    <section id="pricing" class="pricing section-pad">
+        <div class="container">
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">選べる2つのプラン</h2>
+                <span class="pink-line"></span>
+                <p class="sec-sub" style="margin-top:14px;">まずは「のぞき見」から始められます</p>
+            </div>
+            <div class="plans-grid">
+
+                <!-- 梅プラン -->
+                <div class="plan-card">
+                    <p class="plan-name">梅プラン</p>
+                    <p class="plan-title">のぞき見プラン</p>
+                    <span class="plan-target">雰囲気を知りたい方へ</span>
+                    <p class="plan-price">¥980<span>／月</span></p>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li><span class="check">✅</span>厳選AIニュース要約</li>
+                        <li><span class="check">✅</span>秘伝のプロンプト図鑑</li>
+                        <li><span class="check">✅</span>過去記事の全閲覧権限</li>
                     </ul>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <a href="https://note.com/casabranca_1961/n/n9c9ee2d9eba0" class="btn-main" style="padding: 12px 20px; font-size: 1rem; width: 100%;" target="_blank" rel="noopener noreferrer"><span>このプランで</span><span>始める</span></a>
-                    </div>
+                    <a href="https://note.com/casabranca_1961/n/n9c9ee2d9eba0"
+                       class="btn-outline" target="_blank" rel="noopener noreferrer">
+                        このプランで始める
+                    </a>
                 </div>
 
-                <!-- Plan: Take (Featured) -->
-                <div class="step-card" style="border-top: 8px solid var(--accent-gold); transform: scale(1.05); z-index: 10; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-bottom: 5px solid var(--accent-gold);">
-                    <div class="step-num" style="background:var(--accent-gold); border-color: #fff; color: #fff;">竹</div>
-                    <p style="text-align:center; color:var(--highlight-pink); font-weight:bold; margin-top:-10px; margin-bottom: 5px;">★一番人気</p>
-                    <h3 class="step-title" style="margin-top:0;">ギルド・実践プラン</h3>
-                    <p class="text-center" style="font-size: 1.8rem; font-weight: bold; color: var(--primary-blue); margin: 10px 0;">月額 4,980円</p>
-                    <ul style="font-size: 0.95rem; margin: 20px 0; list-style: none; padding: 0; text-align: left; font-weight: bold;">
-                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">限定Discord</span><span class="word-keep">コミュニティ招待</span></li>
-                        <li style="margin-bottom: 8px;">✅ <span class="word-keep">月1回の</span><span class="word-keep">限定ライブ勉強会</span></li>
-                        <li>✅ 仲間と切磋琢磨できる環境</li>
+                <!-- 竹プラン（一番人気） -->
+                <div class="plan-card featured">
+                    <div class="plan-badge">⭐ 一番人気</div>
+                    <p class="plan-name">竹プラン</p>
+                    <p class="plan-title">ギルド・実践プラン</p>
+                    <span class="plan-target">本格的に学びたい方へ</span>
+                    <p class="plan-price">¥4,980<span>／月</span></p>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li><span class="check">✅</span>限定Discordコミュニティ招待</li>
+                        <li><span class="check">✅</span>月1回の限定ライブ勉強会</li>
+                        <li><span class="check">✅</span>仲間と切磋琢磨できる環境</li>
                     </ul>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <a href="https://note.com/casabranca_1961/n/n43fedf42bf3d" class="btn-main" style="padding: 15px 20px; font-size: 1.1rem; width: 100%;" target="_blank" rel="noopener noreferrer"><span>ギルドに</span><span>参加する</span></a>
-                    </div>
+                    <a href="https://note.com/casabranca_1961/n/n43fedf42bf3d"
+                       class="btn-pink" target="_blank" rel="noopener noreferrer">
+                        ギルドに参加する
+                    </a>
                 </div>
-
-                <!-- 松プラン非表示 -->
 
             </div>
         </div>
     </section>
 
-    <!-- Evidence Section -->
-    <section class="section-padding evidence-section">
+    <!-- ===== 8. stand.fm 導線 ===== -->
+    <section id="standfm" class="standfm section-pad">
         <div class="container">
-            <h2 class="section-title" style="color: #fff;">90回以上の登壇と<br>確かな実績</h2>
-            
-            <div class="evidence-grid">
-                <div class="evidence-item">
-                    <span class="evidence-num">90回+</span>
-                    <p>セミナー登壇・伴走支援実績</p>
-                </div>
-                <div class="evidence-item">
-                    <span class="evidence-num">完全在宅での実績例</span>
-                    <p>月収数万円からスタート</p>
-                </div>
-            </div>
-
-            <div class="mirary-comment">
-                <!-- ミラりー画像： onerror で仮画像へ -->
-                <img src="https://i.postimg.cc/Gt1fWybb/アイコン.png" alt="ミラりー" class="mirary-icon" onerror="this.src='https://placehold.co/100x100/0d1b3e/f06292?text=Mirary'">
-                <div class="mirary-balloon">
-                    <strong>🐱 ミラリィより</strong><br>
-                    「さゆっちさんはね、最初はマウスの使い方も怪しかったんだよ（笑）でも、私とお喋りするようにAIを使ってたら、いつの間にか魔法使いになってたの！だから大丈夫、あなたも絶対できるよ♪」
-                </div>
+            <div class="standfm-card">
+                <div class="standfm-icon">🎙</div>
+                <h3>音声でも、やさしくAI活用を<br>お届けしています</h3>
+                <p>
+                    stand.fm では、50代・60代のAI初心者さんに向けて、<br>
+                    ChatGPTやAI活用の小さなコツをお話ししています。<br>
+                    文章を読むより、声で雰囲気を知りたい方は、<br>
+                    ぜひ「さゆっちラジオ」を聴いてみてください。
+                </p>
+                <a href="https://stand.fm/channels/629d96870984f586c273bee9" class="btn-pink"
+                   target="_blank" rel="noopener noreferrer">
+                    🎧 さゆっちラジオを聴く
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Voice Section 1: 3 Cards -->
-    <section id="voice-cards" class="section-padding">
+    <!-- ===== 9. FAQ（折りたたみ式）===== -->
+    <section id="faq" class="faq section-pad">
         <div class="container">
-            <h2 class="section-title">先行体験者の喜びの声</h2>
-            <div class="steps-grid">
-                
-                <!-- Voice 1 -->
-                <div class="step-card" style="border-top: 5px solid var(--highlight-pink);">
-                    <h3 style="font-size: 1.2rem; color: var(--highlight-pink); margin-bottom: 15px; border-bottom: 2px dashed #eee; padding-bottom: 10px;">
-                        ✨ 安心の魔法
-                    </h3>
-                    <p style="font-style: italic; color: #333;">
-                        「AIってこういうことか！とやっと腑に落ちました。実感がなかった私でもこれなら使えます！」
-                    </p>
-                </div>
-
-                <!-- Voice 2 -->
-                <div class="step-card" style="border-top: 5px solid var(--accent-gold);">
-                    <h3 style="font-size: 1.2rem; color: var(--accent-gold); margin-bottom: 15px; border-bottom: 2px dashed #eee; padding-bottom: 10px;">
-                        ✨ 驚きの魔法
-                    </h3>
-                    <p style="font-style: italic; color: #333;">
-                        「インスタ投稿が目から鱗でした！無料ツールでここまでできるなんて驚きです。」
-                    </p>
-                </div>
-
-                <!-- Voice 3 -->
-                <div class="step-card" style="border-top: 5px solid var(--primary-blue);">
-                    <h3 style="font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 15px; border-bottom: 2px dashed #eee; padding-bottom: 10px;">
-                        ✨ 繋がる魔法
-                    </h3>
-                    <p style="font-style: italic; color: #333;">
-                        「中学生の子供にも教えてあげたいほど分かりやすい。仕事にも遊びにも活用したいです！」
-                    </p>
-                </div>
-
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">よくあるご質問</h2>
+                <span class="pink-line"></span>
+                <p class="sec-sub" style="margin-top:14px;">気になることは、まず読んでみてください</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Voice Section 2: Big Image Message -->
-    <section class="sayucchi-voice section-padding">
-        <div class="container voice-container">
-            <h2 class="voice-title section-title">先行体験された方からの<br>温かいメッセージ</h2>
-            
-            <div class="voice-card">
-                <div class="voice-image-wrapper">
-                    <!-- お客様の声画像：プレースホルダー -->
-                    <img src="https://i.postimg.cc/Dzq8mnQ6/嬉しいお言葉をいただきました.png" alt="お客様からのメッセージ" class="voice-image">
-                </div>
-                
-                <div class="voice-content">
-                    <p class="voice-highlight">「オンラインセミナーはどうしてもついていけないことが多いですが、さゆっちさんのご説明がとてもわかりやすく、安心して視聴できました」</p>
-                    <p class="voice-text">
-                        「アーカイブがある」という安心感が申し込みの決め手に。日本語教師を目指す中で、AIを使って教材イラストを作りたいという素敵な夢への第一歩を、一緒に踏み出していただけました。
-                    </p>
-                </div>
-            </div>
-            
-            <p class="voice-footer">※プライバシー保護のため、一部お名前などを伏せて掲載しております。</p>
-        </div>
-    </section>
+            <div class="faq-list">
 
-    <!-- FAQ Section -->
-    <section id="faq" class="section-padding">
-        <div class="container">
-            <div class="faq-header-wrapper">
-                <h2 class="section-title" style="display:inline-block; margin-bottom:0;">魔法のFAQ</h2>
-                <!-- ミラリィちゃんの装飾： onerror で仮画像へ -->
-                <div class="faq-mirary-decoration">
-                    <div class="faq-balloon-deco">質問に答えるよ！</div>
-                    <img src="https://i.postimg.cc/Gt1fWybb/アイコン.png" alt="ミラリィ" class="faq-mirary-img" onerror="this.src='https://placehold.co/80x80/0d1b3e/f06292?text=Cat'">
-                </div>
-            </div>
-            
-            <div class="faq-grid" style="margin-top: 30px;">
-                <!-- Q1 -->
                 <div class="faq-item">
-                    <h3 class="faq-q">
-                        <span class="faq-q-icon">Q.</span>
-                        本当に還暦を過ぎていても大丈夫ですか？
-                    </h3>
-                    <div class="faq-a">
-                        <span class="faq-a-icon">A.</span>
-                        <p style="margin: 0;">
-                            もちろんです！還暦は人生の第二章、冒険のスタート地点です。<br>
-                            ギルドにはあなたより年上の先輩もいらっしゃいますし、何より私自身が還暦を過ぎてからこの魔法を手に入れました。「遅すぎる」ということは絶対にありません。あなたの40年の経験にAIをプラスして、新しい輝きを一緒に見つけましょう。
-                        </p>
+                    <button class="faq-btn" aria-expanded="false">
+                        <span class="faq-q-label">
+                            <span class="faq-q-icon">Q.</span>
+                            <span class="faq-q-text">本当に還暦を過ぎていても大丈夫ですか？</span>
+                        </span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-body">
+                        <div class="faq-a-wrap">
+                            <span class="faq-a-icon">A.</span>
+                            <p class="faq-a-text">
+                                もちろんです！還暦は人生の第二章、冒険のスタート地点です。ギルドにはあなたより年上の先輩もいらっしゃいますし、何より私自身が還暦を過ぎてからこの魔法を手に入れました。「遅すぎる」ということは絶対にありません。あなたの経験にAIをプラスして、新しい輝きを一緒に見つけましょう。
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Q2 -->
                 <div class="faq-item">
-                    <h3 class="faq-q">
-                        <span class="faq-q-icon">Q.</span>
-                        パソコンが苦手ですが、ついていけますか？
-                    </h3>
-                    <div class="faq-a">
-                        <span class="faq-a-icon">A.</span>
-                        <p style="margin: 0;">
-                            ご安心ください。給食のレシピを教えるように、丁寧に解説します。<br>
-                            難しいカタカナの専門用語は一切使いません。「中学生でもわかる言葉」で、一歩ずつ伴走します。わからないことは、いつでもギルドの仲間に聞いてください。ここは「わからない」を宝物にする場所ですから。
-                        </p>
+                    <button class="faq-btn" aria-expanded="false">
+                        <span class="faq-q-label">
+                            <span class="faq-q-icon">Q.</span>
+                            <span class="faq-q-text">パソコンが苦手ですが、ついていけますか？</span>
+                        </span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-body">
+                        <div class="faq-a-wrap">
+                            <span class="faq-a-icon">A.</span>
+                            <p class="faq-a-text">
+                                ご安心ください。給食のレシピを教えるように、丁寧に解説します。難しい専門用語は一切使いません。「中学生でもわかる言葉」で一歩ずつ伴走します。わからないことは、いつでもギルドの仲間に聞いてください。
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Q3 -->
                 <div class="faq-item">
-                    <h3 class="faq-q">
-                        <span class="faq-q-icon">Q.</span>
-                        このギルドは、どんな人には向いていませんか？
-                    </h3>
-                    <div class="faq-a">
-                        <span class="faq-a-icon">A.</span>
-                        <p style="margin: 0;">
-                            「すぐに大きく稼ぎたい」「教わらなくても一人で進めたい」という方には、合わないかもしれません。<br>
-                            このギルドは、わからないことを大切にしながら、一歩ずつ進む場所です。
-                        </p>
+                    <button class="faq-btn" aria-expanded="false">
+                        <span class="faq-q-label">
+                            <span class="faq-q-icon">Q.</span>
+                            <span class="faq-q-text">どんな人には向いていませんか？</span>
+                        </span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-body">
+                        <div class="faq-a-wrap">
+                            <span class="faq-a-icon">A.</span>
+                            <p class="faq-a-text">
+                                「すぐに大きく稼ぎたい」「一人でどんどん進めたい」という方には合わないかもしれません。このギルドは、わからないことを大切にしながら一歩ずつ進む場所です。仲間と一緒に楽しく学びたい方を歓迎します。
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -1203,44 +1469,53 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section id="cta" class="section-padding cta-section">
+    <!-- ===== 10. CTA ===== -->
+    <section id="cta" class="cta-section section-pad">
         <div class="container">
             <div class="cta-box">
-                <h2 style="color: var(--primary-blue); margin-bottom: 20px;">
-                    「わからない」をそのままにしない。<br>まず、話してみませんか。
-                </h2>
-
-                <p style="margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6;">
+                <h2>「わからない」をそのままにしない。<br>まず、話してみませんか。</h2>
+                <p>
                     AIのこと、どこから始めればいいかわからなくて当然です。<br>
                     初回30分・完全無料・売り込みなし。<br>
                     あなたのペースで、一緒に考えます。
                 </p>
-
-                <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="btn-main" target="_blank" rel="noopener noreferrer">
+                <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="btn-pink"
+                   target="_blank" rel="noopener noreferrer">
                     個別無料相談に申し込む
                 </a>
-
-                <p style="margin-top: 25px; font-size: 0.8rem; color: #888;">
-                    フォーム送信後、日程調整のご連絡をお送りします。
-                </p>
+                <p class="cta-note">フォーム送信後、日程調整のご連絡をお送りします。</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== 11. フッター ===== -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Sayucchi AI Guild. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- ===== JavaScript: FAQアコーディオン ===== -->
+    <script>
+        document.querySelectorAll('.faq-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var item = this.closest('.faq-item');
+                var isOpen = item.classList.contains('open');
+
+                // すべて閉じる
+                document.querySelectorAll('.faq-item').forEach(function(i) {
+                    i.classList.remove('open');
+                    i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+                });
+
+                // クリックしたものが閉じていたら開く
+                if (!isOpen) {
+                    item.classList.add('open');
+                    this.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
