@@ -34,7 +34,12 @@
 .case-survey li { font-size: .84rem; line-height: 1.85; }
 .case-survey li + li { margin-top: 8px; }
 .case-survey strong { color: #a52c57; }
-.case-main .case-survey-note { margin: 12px 0 0; font-size: .7rem; line-height: 1.8; color: #586673; }
+.case .case-survey-note { margin: 12px 0 0; font-size: .7rem; line-height: 1.8; color: #586673; }
+.case-grid .case { display: flex; flex-direction: column; }
+.case-grid .case > .case-survey { margin-top: 20px; }
+.case-grid .case-survey h4 { margin: 0 0 10px; }
+.case-grid .case-survey .survey-result { margin: 0 0 10px; font-size: .88rem; }
+.case-grid .case > .text-link { margin-top: 20px; }
 @media (max-width: 740px) {
  .case-main { padding: 26px; grid-template-columns: 1fr; gap: 26px; }
  .case-visual .case-title { gap: 12px; }
