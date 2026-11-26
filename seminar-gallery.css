@@ -15,6 +15,11 @@
 .case > .event-photo { margin-bottom: 24px; }
 .case > .event-photo .event-photo-link { aspect-ratio: 16 / 9; }
 .case > .event-photo figcaption { font-size: .72rem; }
+.case-detail .case-training-photo { margin-bottom: 24px; }
+.case-main .case-title { align-self: center; }
+.case-training-photo .event-photo-link { aspect-ratio: auto; }
+.case-training-photo .event-photo-link img { height: auto; object-fit: contain; }
+.case-training-photo figcaption { font-size: .72rem; }
 .event-photo-link:focus-visible { outline: 3px solid #d94c7d; outline-offset: 4px; }
 @media (max-width: 900px) { .event-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .event-photo-grid { grid-template-columns: 1fr; gap: 24px; } }
