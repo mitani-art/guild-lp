@@ -28,6 +28,13 @@
 .case-training-photo .event-photo-link { aspect-ratio: auto; }
 .case-training-photo .event-photo-link img { height: auto; object-fit: contain; }
 .case-training-photo figcaption { font-size: .72rem; }
+.case-survey { margin-top: 22px; padding: 18px 20px; background: #edf4f0; border-radius: 6px; }
+.case-main .case-survey h4 { margin: 0 0 10px; }
+.case-survey ul { margin: 0; padding-left: 1.2em; }
+.case-survey li { font-size: .84rem; line-height: 1.85; }
+.case-survey li + li { margin-top: 8px; }
+.case-survey strong { color: #a52c57; }
+.case-main .case-survey-note { margin: 12px 0 0; font-size: .7rem; line-height: 1.8; color: #586673; }
 @media (max-width: 740px) {
  .case-main { padding: 26px; grid-template-columns: 1fr; gap: 26px; }
  .case-visual .case-title { gap: 12px; }
