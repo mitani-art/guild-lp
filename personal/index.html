@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50代・60代のAI初心者向け｜さゆっちAIギルド・AI個人レッスン</title>
+    <meta name="description" content="50代・60代のAI初心者へ。さゆっちAIギルドとAI個人レッスンで、仕事や生活に役立つAIの使い方を学べます。">
+    <link rel="icon" href="https://i.postimg.cc/g260DCBP/ロゴ.png">
+    <link rel="canonical" href="https://mitani-art.github.io/guild-lp/personal/">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* =============================================
+           CSS変数・リセット
+        ============================================= */
+        :root {
+            --pink:        #b92559;
+            --pink-light:  #fce4ec;
+            --pink-mid:    #f8b4c8;
+            --blue:        #b92559;
+            --blue-light:  #FAF9F5;
+            --blue-mid:    #f8b4c8;
+            --text:        #333333;
+            --text-sub:    #666666;
+            --white:       #ffffff;
+            --bg:          #FFF4F7;
+            --gold:        #95234b;
+            --border:      #f0d0df;
+            --shadow:      0 4px 20px rgba(240,98,146,0.10);
+            --shadow-card: 0 6px 28px rgba(51,51,51,0.08);
+            --radius:      16px;
+            --radius-sm:   10px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.8;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a   { text-decoration: none; color: inherit; }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-pad { padding: 60px 0; }
+
+        /* =============================================
+           共通：セクション見出し
+        ============================================= */
+        .sec-title {
+            text-align: center;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .sec-sub {
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 1rem;
+            margin-bottom: 48px;
+        }
+        .sec-title-wrap { margin-bottom: 40px; }
+
+        .pink-line {
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--bg);
+            border-radius: 10px;
+            margin: 12px auto 0;
+        }
+
+        /* =============================================
+           共通：カード
+        ============================================= */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-card);
+            padding: 32px 28px;
+            border: 1px solid var(--border);
+        }
+
+        /* =============================================
+           共通：ボタン
+        ============================================= */
+        .btn-pink {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #b92559;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s, box-shadow 0.25s;
+            letter-spacing: 0.04em;
+            text-align: center;
+        }
+        .btn-pink:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--pink);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            border: 2px solid var(--pink);
+            transition: background 0.25s, color 0.25s;
+            text-align: center;
+        }
+        .btn-outline:hover {
+            background: var(--pink-light);
+        }
+
+        .btn-blue {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #b92559;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s, box-shadow 0.25s;
+            letter-spacing: 0.04em;
+            text-align: center;
+        }
+        .btn-blue:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* =============================================
+           0. 固定ナビゲーション
+        ============================================= */
+        .site-nav {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+        }
+        .nav-logo img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--pink-mid);
+            object-fit: cover;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        .nav-menu a {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            transition: color 0.2s;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-menu a:hover {
+            color: var(--pink);
+            border-bottom-color: var(--pink);
+        }
+        .nav-cta {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #b92559;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 767px) {
+            .nav-menu { display: none; }
+            .nav-inner { height: 56px; }
+            /* ①上部ナビCTAを一回り小さく */
+            .nav-cta { font-size: 0.82rem; padding: 8px 16px; }
+        }
+        @media (max-width: 819px) {
+            /* プロフィール下CTAはスマホでは非表示（コピー直後のCTAで代替） */
+            .hero-cta-wrap { display: none; }
+            /* ⑤Hero全体の上下余白を圧縮してプロフィール写真を少し上に */
+            .hero { padding: 20px 0 16px; }
+            /* サブコピーの余白も詰める */
+            .hero-for   { margin-bottom: 4px; }
+            /* ③CTAボタン周辺の余白を詰める */
+            .hero-benefit { margin-bottom: 8px; }
+            /* ④タグの上マージンを抑える */
+            .target-tags { margin-top: 10px; }
+        }
+
+        /* =============================================
+           1. Hero セクション
+        ============================================= */
+        .hero {
+            background: var(--bg);
+            padding: 32px 0 28px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 380px; height: 380px;
+            background: transparent;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -80px; left: -80px;
+            width: 320px; height: 320px;
+            background: transparent;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* --- 2カラムレイアウト --- */
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 28px;
+            align-items: center;
+            text-align: center;
+        }
+        @media (min-width: 820px) {
+            .hero-inner {
+                grid-template-columns: 1.35fr 1fr;
+                text-align: left;
+                gap: 44px;
+                align-items: start;
+            }
+        }
+
+        /* --- 左カラム（テキスト） --- */
+        .hero-text { display: flex; flex-direction: column; }
+
+        /* 誰向けか */
+        .hero-for {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--pink);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        /* メインコピー */
+        .hero-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2.0rem;
+            color: var(--text);
+            line-height: 1.55;
+            margin-bottom: 12px;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+        .hero-title .pink { color: var(--pink); }
+
+        /* スマホのみ表示する改行 */
+        .sp-br { display: inline; }
+        @media (min-width: 820px) { .sp-br { display: none; } }
+
+        /* スマホ専用CTA（説明文直後） */
+        .hero-cta-mobile {
+            display: none;
+        }
+        @media (max-width: 819px) {
+            .hero-cta-mobile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+                margin-top: 12px;
+                width: 100%;
+            }
+        }
+
+        /* ベネフィット文 */
+        .hero-benefit {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        /* 対象者タグ：2列グリッド */
+        .target-tags {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 0;
+        }
+        @media (max-width: 819px) {
+            .target-tags {
+                grid-template-columns: 1fr 1fr;
+                justify-items: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .target-tags { grid-template-columns: 1fr; }
+        }
+        .tag {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--white);
+            border: 1.5px solid var(--pink-mid);
+            color: var(--pink);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 8px 14px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            white-space: nowrap;
+        }
+
+        /* CTAエリア（右カラムに移動） */
+        .hero-cta-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 22px;
+            width: 100%;
+        }
+
+        .hero-cta-btn {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            background: #b92559;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1.15rem;
+            border-radius: 60px;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s, box-shadow 0.25s;
+            letter-spacing: 0.04em;
+            text-align: center;
+            line-height: 1.4;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-cta-btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--bg);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+        .hero-cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        .hero-cta-btn:hover::after { transform: translateX(100%); }
+
+        .hero-note {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            text-align: center;
+        }
+
+        /* --- 右カラム（写真 + CTA） --- */
+        .hero-photo-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        @media (min-width: 820px) {
+            .hero-photo-col { padding-top: 44px; }
+        }
+        .hero-photo-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .hero-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow);
+            object-fit: cover;
+            display: block;
+        }
+        .hero-mirary {
+            position: absolute;
+            bottom: 2px;
+            right: -10px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 2px var(--pink-mid);
+            object-fit: cover;
+        }
+        .hero-name-label {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            line-height: 1.55;
+            text-align: center;
+        }
+        .hero-name-label strong {
+            display: block;
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        @media (min-width: 820px) {
+            .hero-title   { font-size: 2.5rem; }
+            .hero-photo   { width: 190px; height: 190px; }
+            .hero-mirary  { width: 68px; height: 68px; right: -12px; }
+        }
+        @media (min-width: 1024px) {
+            .hero-title   { font-size: 2.8rem; }
+            .hero-photo   { width: 200px; height: 200px; }
+        }
+
+        /* =============================================
+           2. できること（3カード）
+        ============================================= */
+        .features { background: var(--white); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .feature-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            border: 1.5px solid var(--border);
+            transition: transform 0.25s, box-shadow 0.25s;
+            box-shadow: var(--shadow-card);
+        }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 14px;
+        }
+        .feature-card h3 {
+            font-size: 1.05rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .feature-card h3 span {
+            color: var(--pink);
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+        .feature-card-accent {
+            display: block;
+            width: 36px; height: 3px;
+            border-radius: 10px;
+            margin: 0 auto 16px;
+        }
+        .accent-pink  { background: var(--pink); }
+        .accent-blue  { background: var(--blue); }
+        .accent-gold  { background: var(--gold); }
+
+        /* =============================================
+           3. 信頼・実績
+        ============================================= */
+        .evidence { background: var(--bg); }
+
+        .evidence-badges {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto 36px;
+        }
+        .ev-badge {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-sizing: border-box;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            min-width: 0;
+        }
+        .ev-num {
+            display: block;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 800;
+            color: var(--pink);
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        .ev-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 700px) {
+            .evidence-badges {
+                grid-template-columns: minmax(0, 1fr);
+                grid-auto-rows: 1fr;
+                max-width: 360px;
+            }
+            .ev-num { font-size: 1.8rem; }
+        }
+
+        .evidence-spa {
+            background: var(--white);
+            border: 1.5px solid var(--pink-mid);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            max-width: 560px;
+            margin: 0 auto 24px;
+            box-shadow: var(--shadow);
+        }
+        .spa-icon { font-size: 2rem; flex-shrink: 0; }
+        .spa-text { font-size: 0.92rem; color: var(--text); line-height: 1.6; }
+        .spa-text strong { color: var(--pink); }
+
+        .csnet-link {
+            display: block;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 22px;
+            max-width: 560px;
+            margin: 0 auto;
+            color: var(--blue);
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: var(--shadow-card);
+        }
+        .csnet-link:hover { background: var(--blue-light); transform: translateY(-2px); }
+        .csnet-link-text { display: inline-block; white-space: nowrap; }
+
+        /* =============================================
+           4. ストーリー
+        ============================================= */
+        .story { background: var(--white); }
+
+        .story-card {
+            max-width: 760px;
+            margin: 0 auto;
+            background: var(--bg);
+            border-left: 5px solid var(--pink);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 32px 36px;
+            box-shadow: var(--shadow-card);
+        }
+        .story-card p {
+            font-size: 1rem;
+            color: var(--text);
+            text-align: left;
+            line-height: 1.85;
+            margin-bottom: 16px;
+        }
+        .story-card p:last-child { margin-bottom: 0; }
+        .story-card .story-name {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            text-align: right;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* =============================================
+           5. 3ステップ
+        ============================================= */
+        .steps { background: var(--bg); }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .steps-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .step-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            position: relative;
+            padding-top: 46px;
+        }
+        .step-num {
+            position: absolute;
+            top: -20px;
+            left: 24px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #b92559;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+        .step-card h3 {
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .step-card p {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+
+        /* =============================================
+           6. お客様の声
+        ============================================= */
+        .voice { background: var(--white); }
+
+        .voice-main-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            margin-bottom: 32px;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .voice-main-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .voice-main-body {
+            padding: 28px 32px;
+        }
+        .voice-quote {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.7;
+            border-left: 4px solid var(--pink);
+            padding-left: 16px;
+            margin-bottom: 14px;
+        }
+        .voice-main-body p {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+
+        .voice-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .voice-cards-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .voice-mini-card {
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 24px 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+        }
+        .voice-mini-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .voice-mini-label .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-pink { background: var(--pink); }
+        .dot-blue { background: var(--blue); }
+        .dot-gold { background: var(--gold); }
+
+        .voice-mini-card p {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.7;
+            font-style: italic;
+        }
+        .voice-footer-note {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-sub);
+            margin-top: 24px;
+        }
+
+        /* =============================================
+           7. プラン
+        ============================================= */
+        .pricing { background: var(--bg); }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 28px;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        @media (min-width: 640px) {
+            .plans-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .plan-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            position: relative;
+            transition: transform 0.25s;
+        }
+        .plan-card:hover { transform: translateY(-4px); }
+
+        .plan-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .plan-target {
+            font-size: 0.82rem;
+            color: var(--pink);
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding: 5px 14px;
+            background: var(--pink-light);
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+        .plan-price span {
+            margin-right: 0.35em;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-sub);
+        }
+        .plan-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .plan-features li {
+            font-size: 0.9rem;
+            color: var(--text);
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.5;
+        }
+        .plan-features li .check { color: var(--pink); font-weight: 700; flex-shrink: 0; }
+        .plan-description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .plan-card .btn-pink { width: 100%; margin-top: auto; }
+
+        /* =============================================
+           8. stand.fm 導線
+        ============================================= */
+        .standfm { background: var(--white); }
+
+        .standfm-card {
+            max-width: 680px;
+            margin: 0 auto;
+            background: var(--bg);
+            border: 2px solid var(--pink-mid);
+            border-radius: var(--radius);
+            padding: 40px 36px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .standfm-icon { font-size: 3rem; margin-bottom: 12px; }
+        .standfm-card h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .standfm-card p {
+            font-size: 0.92rem;
+            color: var(--text-sub);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+        .standfm-card .btn-pink {
+            font-size: 1rem;
+            padding: 14px 36px;
+        }
+
+        /* =============================================
+           9. FAQ（アコーディオン）
+        ============================================= */
+        .faq { background: var(--bg); }
+
+        .faq-list {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
+        .faq-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 20px 24px;
+            text-align: left;
+            font-family: inherit;
+        }
+        .faq-btn:hover { background: var(--pink-light); }
+
+        .faq-q-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            flex: 1;
+        }
+        .faq-q-icon {
+            color: var(--pink);
+            font-size: 1.1rem;
+            font-weight: 800;
+            font-family: serif;
+            flex-shrink: 0;
+            line-height: 1.5;
+        }
+        .faq-q-text {
+            font-size: 0.97rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .faq-arrow {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--pink-light);
+            border-radius: 50%;
+            transition: transform 0.3s;
+            color: var(--pink);
+            font-size: 0.75rem;
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+        .faq-body {
+            display: none;
+            padding: 0 24px 22px;
+        }
+        .faq-item.open .faq-body { display: block; }
+
+        .faq-a-wrap {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+        .faq-a-icon {
+            color: var(--blue);
+            font-size: 1.1rem;
+            font-weight: 800;
+            font-family: serif;
+            flex-shrink: 0;
+            line-height: 1.5;
+        }
+        .faq-a-text {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.75;
+        }
+
+        /* =============================================
+           10. CTA
+        ============================================= */
+        .cta-section { background: var(--white); }
+
+        .cta-box {
+            max-width: 680px;
+            margin: 0 auto;
+            background: var(--bg);
+            border: 2px solid var(--pink-mid);
+            border-radius: var(--radius);
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .cta-box h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .cta-box p {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            margin-bottom: 28px;
+            line-height: 1.8;
+        }
+        .cta-box .btn-pink {
+            font-size: 1.25rem;
+            padding: 18px 48px;
+        }
+        .cta-note {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            margin-top: 14px;
+        }
+
+        /* =============================================
+           11. フッター
+        ============================================= */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 28px 20px;
+            font-size: 0.8rem;
+        }
+        footer a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: underline;
+            margin: 0 6px;
+        }
+
+        /* =============================================
+           レスポンシブ共通
+        ============================================= */
+        @media (max-width: 600px) {
+            .sec-title      { font-size: 1.65rem; }
+            .hero-title     { font-size: 2.0rem; }
+            .hero-for       { font-size: 1rem; }
+            .hero-benefit   { font-size: 1rem; }
+            .hero-cta-btn   { font-size: 1.1rem; padding: 15px 20px; }
+            .section-pad    { padding: 48px 0; }
+            .cta-box, .standfm-card { padding: 32px 20px; }
+            .story-card     { padding: 24px 22px; }
+            .hero-photo     { width: 140px; height: 140px; }
+            .hero-mirary    { width: 52px; height: 52px; }
+        }
+
+        html { scroll-padding-top: 88px; }
+        .hero-benefit, .feature-card p, .voice-card p, .lesson-detail { text-align: left; }
+        .lesson-detail { width: 100%; padding: 16px; margin-bottom: 16px; background: var(--bg); border-radius: var(--radius-sm); }
+        .lesson-detail p { font-size: .9rem; }
+        .plan-card { min-width: 0; }
+        .plan-features { align-self: stretch; }
+        .plan-price .tax { display: inline-block; margin: 0; }
+        .business-teaser { padding-block: 32px; }
+        .business-teaser p { margin: 8px 0 16px; }
+        .nav-menu .nav-business a { color: var(--pink); }
+        @media (max-width: 819px) {
+            .hero-cta-wrap { display: none; }
+            .hero .target-tags { display: none; }
+            .hero-photo-col { gap: 8px; }
+            .hero-inner { gap: 14px; }
+            .hero-title { font-size: clamp(1.65rem, 7.5vw, 2rem); }
+        }
+        @media (max-width: 950px) {
+            .nav-menu { display: block; }
+            .nav-menu li:not(.nav-business) { display: none; }
+            .nav-menu .nav-business a { display: block; padding: 8px 4px; font-size: .85rem; text-align: center; }
+            .nav-inner { gap: 8px; padding-inline: 12px; }
+            .nav-logo { flex: none; }
+            .nav-cta { padding-inline: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 0. 固定ナビゲーション ===== -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <a href="#top">
+                    <img src="https://i.postimg.cc/g260DCBP/ロゴ.png" alt="さゆっちAIギルド ロゴ"
+                         onerror="this.src='https://placehold.co/40x40/f06292/ffffff?text=S'">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-business"><a href="../business/index.html">事業者・福祉事業所向け</a></li>
+                <li><a href="#features">できること</a></li>
+                <li><a href="#pricing">料金</a></li>
+                <li><a href="#voice">お客様の声</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="https://stand.fm/channels/629d96870984f586c273bee9" target="_blank" rel="noopener noreferrer">🎙️ 配信</a></li>
+            </ul>
+            <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="nav-cta" target="_blank" rel="noopener noreferrer">
+                ✉ 無料相談する
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== 1. Hero（ファーストビュー）===== -->
+    <header id="top" class="hero">
+        <div class="container">
+            <div class="hero-inner">
+
+                <!-- 左カラム：テキスト -->
+                <div class="hero-text">
+
+                    <p class="hero-for">📣 50代・60代のAI初心者さんへ</p>
+
+                    <h1 class="hero-title">
+                        「わからない」を<br class="sp-br">笑わない。<br>
+                        <span class="pink">一番やさしい</span><br>
+                        AIの相談窓口
+                    </h1>
+
+                    <p class="hero-benefit">
+                        PCが苦手でも、AIが怖くても大丈夫。<br>
+                        専門用語なし・売り込みなしで、<br>
+                        あなたのペースで一緒に進みます。
+                    </p>
+
+                    <!-- スマホ専用CTA（PCでは非表示） -->
+
+                    <div class="target-tags">
+                        <span class="tag">✅ PCが苦手な方</span>
+                        <span class="tag">✅ 50代・60代の方</span>
+                        <span class="tag">✅ AIを仕事や生活に活かしたい方</span>
+                        <span class="tag">✅ はじめて一歩を踏み出したい方</span>
+                    </div>
+
+                </div>
+
+                <!-- 右カラム：写真 + CTA -->
+                <div class="hero-photo-col">
+
+                    <div class="hero-photo-wrap">
+                        <img src="https://i.postimg.cc/ZR9Zbpkw/2025_12_20_プロフィール写真.png"
+                             alt="三谷小百合（さゆっち）" class="hero-photo"
+                             onerror="this.src='https://placehold.co/200x200/f06292/ffffff?text=Sayucchi'">
+                        <img src="https://i.postimg.cc/Gt1fWybb/アイコン.png"
+                             alt="猫耳少女ミラりー" class="hero-mirary"
+                             onerror="this.src='https://placehold.co/58x58/0d1b3e/f06292?text=M'">
+                    </div>
+
+                    <p class="hero-name-label">
+                        <strong>三谷小百合（さゆっち）</strong>
+                        岡山在住 65歳・生成AIコンサルタント
+                    </p>
+
+                    <div class="hero-cta-mobile">
+                        <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="hero-cta-btn"
+                           target="_blank" rel="noopener noreferrer">
+                            個別無料相談に申し込む
+                        </a>
+                        <p class="hero-note">🕐 初回30分・完全無料・売り込みなし</p>
+                    </div>
+
+                    <div class="hero-cta-wrap">
+                        <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="hero-cta-btn"
+                           target="_blank" rel="noopener noreferrer">
+                            個別無料相談に申し込む
+                        </a>
+                        <p class="hero-note">🕐 初回30分・完全無料・売り込みなし</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== 2. できること ===== -->
+    <section id="features" class="features section-pad">
+        <div class="container">
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">AIを学んで<br>できること</h2>
+                <span class="pink-line"></span>
+                <p class="sec-sub" style="margin-top:14px;">専門用語なし・手厚いサポートで、初めてでも安心です</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-card-accent accent-pink"></span>
+                    <div class="feature-icon">🤝</div>
+                    <h3><span>AIの使い方を</span><br>やさしく教えてもらえる</h3>
+                    <p>専門用語はいっさい使いません。「お料理のレシピ」のような言葉で、ChatGPTやAIツールの使い方を丁寧に解説します。</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-card-accent accent-blue"></span>
+                    <div class="feature-icon">📱</div>
+                    <h3><span>SNSやコンテンツ作り</span>に<br>AIを活用できる</h3>
+                    <p>インスタ投稿・動画・ブログ文章をAIと一緒に作る実践スキルを身につけられます。時間と手間を大きく減らせます。</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-card-accent accent-gold"></span>
+                    <div class="feature-icon">💬</div>
+                    <h3><span>わからないをそのまま</span>に<br>しない仲間がいる</h3>
+                    <p>Discordコミュニティで仲間と一緒に学べます。メンバー同士で作品や日々の取り組みを共有できます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 3. プラン ===== -->
+    <section id="pricing" class="pricing section-pad">
+        <div class="container">
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">2つの学び方から選べます</h2>
+                <span class="pink-line"></span>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3 class="plan-title">さゆっちAIギルド</h3>
+                    <p class="plan-price"><span>月額</span>4,980円</p>
+                    <p class="plan-target">オンライン・継続型</p>
+                    <div class="plan-divider"></div>
+                    <p class="plan-description">AIを継続して学び、ほかのメンバーと一緒に実践したい方向けのnoteメンバーシップです。</p>
+                    <ul class="plan-features">
+                        <li><span class="check" aria-hidden="true">✅</span>月1回のオンライン・グループ勉強会</li>
+                        <li><span class="check" aria-hidden="true">✅</span>勉強会のアーカイブ共有</li>
+                        <li><span class="check" aria-hidden="true">✅</span>メンバーシップ対象の有料note記事を閲覧</li>
+                        <li><span class="check" aria-hidden="true">✅</span>DiscordでAIに関する情報を配信</li>
+                        <li><span class="check" aria-hidden="true">✅</span>週1回「AIチャレンジ」のプロンプト例を共有</li>
+                        <li><span class="check" aria-hidden="true">✅</span>画像や動画の作品を投稿できるアウトプットチャンネル</li>
+                        <li><span class="check" aria-hidden="true">✅</span>メンバー同士で交流できる雑談チャンネル</li>
+                    </ul>
+                    <p class="plan-description">※マンツーマンの個別レッスンは含まれません。<br>※メンバーシップ対象の記事やアーカイブは、参加期間中に閲覧できます。</p>
+                    <a href="https://note.com/casabranca_1961/n/n43fedf42bf3d"
+                       class="btn-pink" target="_blank" rel="noopener noreferrer">
+                        ギルドに参加する
+                    </a>
+                </div>
+
+                <div class="plan-card">
+                    <h3 class="plan-title">AI個人レッスン</h3>
+                    <p class="plan-price"><span>60分</span>8,000円<span class="tax">（税込）</span></p>
+                    <p class="plan-target">対面・オンライン／単発型</p>
+                    <div class="plan-divider"></div>
+                    <p class="plan-description">自分の課題や知りたい内容について、マンツーマンで学びたい方向けの完全予約制レッスンです。</p>
+                    <ul class="plan-features">
+                        <li><span class="check" aria-hidden="true">✅</span>相談内容に合わせた個別レッスン</li>
+                        <li><span class="check" aria-hidden="true">✅</span>対面またはオンラインから選択</li>
+                        <li><span class="check" aria-hidden="true">✅</span>1回60分</li>
+                        <li><span class="check" aria-hidden="true">✅</span>必要なときに1回ずつ申し込み</li>
+                        <li><span class="check" aria-hidden="true">✅</span>ChatGPT、Canva、Instagram、NotebookLMなどの操作・活用</li>
+                        <li><span class="check" aria-hidden="true">✅</span>AIを使った文章、画像、SNS投稿などの作成</li>
+                        <li><span class="check" aria-hidden="true">✅</span>ホームページに載せる内容の整理</li>
+                    </ul>
+                    <div class="lesson-detail">
+                        <h4>ホームページに載せる内容をAIと整理できる</h4>
+                        <p>誰に何を伝えるか、サービス内容、プロフィール、問い合わせ方法などを整理し、AIを使ってトップページの構成案を作る方法をサポートします。</p>
+                    </div>
+                    <p class="plan-description">※Discordコミュニティや継続的な情報配信は含まれません。<br>※ホームページ制作代行を行うサービスではありません。</p>
+                    <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7"
+                       class="btn-pink" target="_blank" rel="noopener noreferrer">
+                        個人レッスンを問い合わせる
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 4. 3ステップ ===== -->
+    <section id="steps" class="steps section-pad">
+        <div class="container">
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">家でできるAI活用<br>3つのステップ</h2>
+                <span class="pink-line"></span>
+                <p class="sec-sub" style="margin-top:14px;">一歩ずつ、あなたのペースで進めます</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3>AIへの「伝え方の型」を覚える</h3>
+                    <p>AIは優秀な助手ですが、伝え方にコツがあります。そのレシピをテンプレートでお渡しします。すぐに使えます。</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3>一人で頑張らない仕組みを作る</h3>
+                    <p>投稿や動画を「量産」できる仕組みを構築します。あなたの時間を守りながら、コンテンツを生み出し続けられます。</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3>「選ばれる形」に整えていく</h3>
+                    <p>「あなたにお願いしたい」と言われるための商品パッケージ術と、高単価案件の獲得に向けた信頼構築の考え方を伝授します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="instructor-title">
+        <!-- ===== 5. 信頼・実績 ===== -->
+        <section id="evidence" class="evidence section-pad">
+            <div class="container">
+                <div class="sec-title-wrap text-center">
+                    <h2 class="sec-title" id="instructor-title">講師について</h2>
+                    <p class="sec-sub">確かな実績と地域に根ざした活動</p>
+                    <span class="pink-line"></span>
+                </div>
+
+                <div class="evidence-badges">
+                    <div class="ev-badge">
+                        <span class="ev-num">100回以上</span>
+                        <span class="ev-label">AI講座・セミナー登壇</span>
+                    </div>
+                    <div class="ev-badge">
+                        <span class="ev-num">5,000人以上</span>
+                        <span class="ev-label">講座・セミナー参加者（延べ）</span>
+                    </div>
+                    <div class="ev-badge">
+                        <span class="ev-num">65歳</span>
+                        <span class="ev-label">現役AI講師として活動中</span>
+                    </div>
+                </div>
+
+                <div class="evidence-spa">
+                    <span class="spa-icon">📰</span>
+                    <div>
+                        <p class="spa-text"><strong>週刊SPA!（2026年4月21日号）</strong>および日刊SPA! Web版に掲載。メディアにも注目される活動を続けています。</p>
+                        <a href="https://nikkan-spa.jp/2154506" class="btn-outline" style="margin-top:12px; font-size:0.88rem; padding:8px 20px; display:inline-block;"
+                           target="_blank" rel="noopener noreferrer">📰 日刊SPA!掲載記事を見る →</a>
+                    </div>
+                </div>
+
+                <a href="https://tsuyama-biz.jp/csnet/member/mitani/" target="_blank" rel="noopener noreferrer" class="csnet-link">
+                    <span class="csnet-link-text">C’snet津山｜</span><wbr><span class="csnet-link-text">公式プロフィールを見る →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== 6. ストーリー ===== -->
+        <section id="story" class="story section-pad">
+            <div class="container">
+                <div class="sec-title-wrap text-center">
+                    <h3 class="sec-title">「AIって、私には難しそう」<br>と思っていたのは、私自身でした。</h3>
+                    <span class="pink-line"></span>
+                </div>
+                <div class="story-card">
+                    <p>2018年に学校での仕事を退職し、2020年からWeb制作を学び始めました。</p>
+                    <p>63歳で生成AIの学びを本格化し、2024年4月にはAI画像制作の仕事を初めて受注。5日間で165枚の画像を制作しました。</p>
+                    <p>その後は画像を作る仕事だけでなく、AIの使い方を伝える活動へと仕事の幅を広げ、2024年9月からAI講師としての活動を始めました。</p>
+                    <p>現在はAI講師・AIクリエイターとして、自治体・企業・福祉事業所などで講座を行っています。</p>
+                    <p>私も、最初からAIを使いこなせたわけではありません。専門用語や新しいツールに戸惑いながら、実際に手を動かし、一つずつできることを増やしてきました。</p>
+                    <p>自分自身が60代から学び始めたからこそ、初めてAIに触れる方が、どこでつまずき、何を不安に感じるのかが分かります。</p>
+                    <p>「わからない」を笑わず、その人のペースで一緒に進む。それが私の支援の原点です。</p>
+                    <p class="story-name">— 三谷小百合（さゆっち）</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 7. stand.fm 導線 ===== -->
+        <section id="standfm" class="standfm section-pad">
+            <div class="container">
+                <div class="standfm-card">
+                    <div class="standfm-icon">🎙</div>
+                    <h3>音声でも、やさしくAI活用を<br>お届けしています</h3>
+                    <p>
+                        stand.fm では、50代・60代のAI初心者さんに向けて、<br>
+                        ChatGPTやAI活用の小さなコツをお話ししています。<br>
+                        文章を読むより、声で雰囲気を知りたい方は、<br>
+                        ぜひ「さゆっちラジオ」を聴いてみてください。
+                    </p>
+                    <a href="https://stand.fm/channels/629d96870984f586c273bee9" class="btn-pink"
+                       target="_blank" rel="noopener noreferrer">
+                        🎧 さゆっちラジオを聴く
+                    </a>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- ===== 8. お客様の声 ===== -->
+    <section id="voice" class="voice section-pad">
+        <div class="container">
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">ご参加された方の声</h2>
+                <span class="pink-line"></span>
+            </div>
+
+            <div class="voice-main-card">
+                <img src="https://i.postimg.cc/Dzq8mnQ6/嬉しいお言葉をいただきました.png"
+                     alt="お客様からのメッセージ" class="voice-main-img">
+                <div class="voice-main-body">
+                    <p class="voice-quote">「オンラインセミナーはどうしてもついていけないことが多いですが、さゆっちさんのご説明がとてもわかりやすく、安心して視聴できました」</p>
+                    <p>日本語教師を目指す中で、AIを使って教材イラストを作りたいという夢への第一歩を、一緒に踏み出していただけました。アーカイブがある安心感が申し込みの決め手に。</p>
+                </div>
+            </div>
+
+            <div class="voice-cards-grid">
+                <div class="voice-mini-card">
+                    <div class="voice-mini-label">
+                        <span class="dot dot-pink"></span>
+                        <span style="color:var(--pink);">✨ 安心の声</span>
+                    </div>
+                    <p>「AIってこういうことか！とやっと腑に落ちました。実感がなかった私でもこれなら使えます！」</p>
+                </div>
+                <div class="voice-mini-card">
+                    <div class="voice-mini-label">
+                        <span class="dot dot-blue"></span>
+                        <span style="color:var(--blue);">✨ 驚きの声</span>
+                    </div>
+                    <p>「インスタ投稿が目から鱗でした！無料ツールでここまでできるなんて驚きです。」</p>
+                </div>
+                <div class="voice-mini-card">
+                    <div class="voice-mini-label">
+                        <span class="dot dot-gold"></span>
+                        <span style="color:var(--gold);">✨ 実践の声</span>
+                    </div>
+                    <p>「中学生の子供にも教えてあげたいほど分かりやすい。仕事にも遊びにも活用したいです！」</p>
+                </div>
+            </div>
+
+            <p class="voice-footer-note">※プライバシー保護のため、一部お名前などを伏せて掲載しております。</p>
+        </div>
+    </section>
+
+    <!-- ===== 9. FAQ（折りたたみ式）===== -->
+    <section id="faq" class="faq section-pad">
+        <div class="container">
+            <div class="sec-title-wrap text-center">
+                <h2 class="sec-title">よくあるご質問</h2>
+                <span class="pink-line"></span>
+                <p class="sec-sub" style="margin-top:14px;">気になることは、まず読んでみてください</p>
+            </div>
+
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-btn" aria-expanded="false">
+                        <span class="faq-q-label">
+                            <span class="faq-q-icon">Q.</span>
+                            <span class="faq-q-text">本当に還暦を過ぎていても大丈夫ですか？</span>
+                        </span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-body">
+                        <div class="faq-a-wrap">
+                            <span class="faq-a-icon">A.</span>
+                            <p class="faq-a-text">
+                                もちろんです！還暦は人生の第二章、冒険のスタート地点です。ギルドにはあなたより年上の先輩もいらっしゃいますし、何より私自身が還暦を過ぎてからこの魔法を手に入れました。「遅すぎる」ということは絶対にありません。あなたの経験にAIをプラスして、新しい輝きを一緒に見つけましょう。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn" aria-expanded="false">
+                        <span class="faq-q-label">
+                            <span class="faq-q-icon">Q.</span>
+                            <span class="faq-q-text">パソコンが苦手ですが、ついていけますか？</span>
+                        </span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-body">
+                        <div class="faq-a-wrap">
+                            <span class="faq-a-icon">A.</span>
+                            <p class="faq-a-text">
+                                はい。専門用語はできるだけ使わず、実際の画面を見ながら、操作を一つずつ進めます。AI個人レッスンでは、普段お使いのパソコンやスマートフォンで、つまずいたところから一緒に練習できます。ほかの方と一緒に学びたい方は、ギルドのグループ勉強会をご利用いただけます。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn" aria-expanded="false">
+                        <span class="faq-q-label">
+                            <span class="faq-q-icon">Q.</span>
+                            <span class="faq-q-text">どんな人には向いていませんか？</span>
+                        </span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-body">
+                        <div class="faq-a-wrap">
+                            <span class="faq-a-icon">A.</span>
+                            <p class="faq-a-text">
+                                「すぐに大きく稼ぎたい」「一人でどんどん進めたい」という方には合わないかもしれません。このギルドは、わからないことを大切にしながら一歩ずつ進む場所です。仲間と一緒に楽しく学びたい方を歓迎します。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 10. CTA ===== -->
+    <section id="cta" class="cta-section section-pad">
+        <div class="container">
+            <div class="cta-box">
+                <h2>「わからない」をそのままにしない。<br>まず、話してみませんか。</h2>
+                <p>
+                    AIのこと、どこから始めればいいかわからなくて当然です。<br>
+                    初回30分・完全無料・売り込みなし。<br>
+                    あなたのペースで、一緒に考えます。
+                </p>
+                <a href="https://forms.gle/dEu2e7sUrwFVU1Ty7" class="btn-pink"
+                   target="_blank" rel="noopener noreferrer">
+                    個別無料相談に申し込む
+                </a>
+                <p class="cta-note">フォーム送信後、日程調整のご連絡をお送りします。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 11. フッター ===== -->
+    <aside class="container business-teaser">
+        <div class="card">
+            <h2>事業者・福祉事業所の方へ</h2>
+            <p>ChatGPTを使ったSNS発信を、担当者自身が継続できるようにする3か月の実践伴走サポートをご用意しています。</p>
+            <a class="btn-outline" href="../business/index.html">事業者向けサービスを見る</a>
+        </div>
+    </aside>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Sayucchi AI Guild. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript: FAQアコーディオン ===== -->
+    <script>
+        document.querySelectorAll('.faq-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var item = this.closest('.faq-item');
+                var isOpen = item.classList.contains('open');
+
+                // すべて閉じる
+                document.querySelectorAll('.faq-item').forEach(function(i) {
+                    i.classList.remove('open');
+                    i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+                });
+
+                // クリックしたものが閉じていたら開く
+                if (!isOpen) {
+                    item.classList.add('open');
+                    this.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
