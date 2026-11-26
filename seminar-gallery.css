@@ -15,15 +15,26 @@
 .case > .event-photo { margin-bottom: 24px; }
 .case > .event-photo .event-photo-link { aspect-ratio: 16 / 9; }
 .case > .event-photo figcaption { font-size: .72rem; }
-.case-main > .case-training-photo { margin: 0; align-self: start; }
-.case-main .case-detail { border: 0; padding: 0; margin-top: 20px; }
-.case-main .case-meta { margin-bottom: 10px; }
-.case-main h3 { margin-bottom: 12px; }
-.case-main .case-number { font-size: 2.3rem; margin-top: 12px; margin-bottom: 10px; }
-.case-copy { min-width: 0; }
-.case-main > .case-training-photo .event-photo-link { aspect-ratio: auto; }
+/* Match the photo width and inset of the two case cards below. */
+.case-main { padding: 32px; column-gap: 84px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; }
+.case-visual { min-width: 0; }
+.case-visual .case-title { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; margin-bottom: 20px; }
+.case-main .case-title h3 { margin: 0; font-size: 1.16rem; }
+.case-main .case-title .case-number { margin: 0; font-size: 2.3rem; white-space: nowrap; }
+.case-main .case-number span { display: block; margin: 0; font-size: .75rem; }
+.case-main .case-detail { border: 0; padding: 0; margin: 0; }
+.case-main .case-detail .case-meta { margin-bottom: 10px; }
+.case-visual .case-training-photo { margin: 0; }
+.case-training-photo .event-photo-link { aspect-ratio: auto; }
 .case-training-photo .event-photo-link img { height: auto; object-fit: contain; }
 .case-training-photo figcaption { font-size: .72rem; }
+@media (max-width: 740px) {
+ .case-main { padding: 26px; grid-template-columns: 1fr; gap: 26px; }
+ .case-visual .case-title { gap: 12px; }
+ .case-main .case-title h3 { font-size: 1rem; }
+ .case-main .case-title h3 br { display: none; }
+ .case-main .case-title .case-number { font-size: 2rem; }
+}
 .event-photo-link:focus-visible { outline: 3px solid #d94c7d; outline-offset: 4px; }
 @media (max-width: 900px) { .event-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .event-photo-grid { grid-template-columns: 1fr; gap: 24px; } }
