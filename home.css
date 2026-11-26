@@ -135,7 +135,7 @@ footer { border-top: 1px solid var(--line); }
 .footer-inner > a:not(.brand) { font-size: .8rem; }
 .footer-inner > small { font-size: .7rem; color: var(--muted); }
 .mobile-break { display: none; }
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .desktop-nav { display: none; }
   .mobile-nav { display: block; }
   .mobile-nav summary { padding: 12px; font-weight: 700; font-size: .9rem; }
