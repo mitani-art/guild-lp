@@ -1,4 +1,11 @@
 .event-photos { margin-top: 54px; color: #17324d; font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", Meiryo, sans-serif; text-align: left; }
+.evidence-fold { margin-top: 24px; border: 1px solid #bdcfca; border-radius: 8px; color: #17324d; font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; text-align: left; }
+.evidence-fold > summary { cursor: pointer; padding: 20px 24px; font-weight: 700; line-height: 1.8; }
+.evidence-fold > summary span { display: block; padding-left: 19px; color: #586673; font-size: .78rem; font-weight: 400; }
+.evidence-fold > summary:focus-visible { outline: 3px solid #d94c7d; outline-offset: 4px; }
+.evidence-fold-content { padding: 0 24px 28px; }
+.evidence-fold-content > .event-photos:first-child, .evidence-fold-content > .seminar-archive { margin-top: 14px; }
+@media (max-width: 560px) { .evidence-fold > summary { padding: 18px 16px; } .evidence-fold-content { padding: 0 16px 22px; } }
 .seminar-section .event-photos { margin-top: 0; }
 .event-photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .event-photo { margin: 0; min-width: 0; }
