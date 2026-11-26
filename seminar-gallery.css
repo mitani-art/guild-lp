@@ -1,3 +1,16 @@
+.event-photos { margin-top: 54px; color: #17324d; font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", Meiryo, sans-serif; text-align: left; }
+.seminar-section .event-photos { margin-top: 0; }
+.event-photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.event-photo { margin: 0; min-width: 0; }
+.event-photo-link { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 7px; background: #d8e0dd; cursor: zoom-in; }
+.event-photo-link img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 65%; }
+.event-photo figcaption { margin-top: 10px; font-size: .8rem; color: #586673; line-height: 1.8; }
+.case > .event-photo { margin-bottom: 24px; }
+.case > .event-photo .event-photo-link { aspect-ratio: 16 / 9; }
+.case > .event-photo figcaption { font-size: .72rem; }
+.event-photo-link:focus-visible { outline: 3px solid #d94c7d; outline-offset: 4px; }
+@media (max-width: 900px) { .event-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .event-photo-grid { grid-template-columns: 1fr; gap: 24px; } }
 .seminar-archive {
   margin-top: 54px;
   color: #17324d;
@@ -42,3 +55,6 @@
   .seminar-dialog-body { padding: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { .seminar-image img { transition: none; } }
+
+.seminar-section .event-photos + .event-photos { margin-top: 64px; }
+.seminar-section .event-photos + .seminar-archive { margin-top: 64px; }
